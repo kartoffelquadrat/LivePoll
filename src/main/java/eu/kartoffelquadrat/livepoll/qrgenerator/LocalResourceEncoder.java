@@ -39,7 +39,7 @@ public class LocalResourceEncoder {
         + localIpResolver.lookupOwnLocalAreaNetworkIp()
         + ":"
         + port
-        + "/"
+        + "/polls/"
         + pollId
         + "/"
         + resource;
