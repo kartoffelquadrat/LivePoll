@@ -1,5 +1,7 @@
 package eu.kartoffelquadrat.livepoll.qrgenerator;
 
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.net.*;
 
@@ -8,9 +10,10 @@ import java.net.*;
  * If multiple network cards are used and they both connect to the internet the IP of the first one indexed by the OS
  * is returned.
  */
+@Component
 public class LocalIpResolver {
 
-    public static String lookupOwnLocalAreaNetworkIp() throws IOException {
+    public String lookupOwnLocalAreaNetworkIp() throws IOException {
 
         // Open a socket connection to google to look up network information.
         Socket socket = new Socket();
