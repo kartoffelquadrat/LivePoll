@@ -1,11 +1,9 @@
 package eu.kartoffelquadrat.livepoll.qrgenerator;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 
 /**
  * Helper class to build unique http resource strings.
@@ -13,23 +11,37 @@ import java.io.IOException;
 @Component
 public class LocalResourceEncoder {
 
-    @Autowired
-    LocalIpResolver localIpResolver;
+  final LocalIpResolver localIpResolver;
 
-    @Value("${server.port}")
-    String port;
+  @Value("${server.port}")
+  String port;
 
-    public String buildResourceString(long pollId, String resource) throws IOException {
+  public LocalResourceEncoder(LocalIpResolver localIpResolver) {
+    this.localIpResolver = localIpResolver;
+  }
 
-        // replace any whitespaces in resource strings
-        resource.replaceAll("\\s+", "-");
+  /**
+   * Builds an HTTP URI string using localhost's IP and this webapps port number.
+   *
+   * @param pollId   as previously generated string that encodes the poll id
+   * @param resource as the name of the resource (should be a specific option represented by a
+   *                 vote)
+   * @return the created URL string.
+   * @throws IOException in case the lookup of the localhost IP address failed.
+   */
+  public String buildResourceString(long pollId, String resource) throws IOException {
 
-        // Actually compose the resource string
-        StringBuilder resourceStringBuilder = new StringBuilder("http://");
-        resourceStringBuilder.append(localIpResolver.lookupOwnLocalAreaNetworkIp());
-        resourceStringBuilder.append(":").append(port);
-        resourceStringBuilder.append("/").append(pollId);
-        resourceStringBuilder.append("/").append(resource);
-        return resourceStringBuilder.toString();
-    }
+    // replace any whitespaces in resource strings
+    resource = resource.replaceAll("\\s+", "-");
+
+    // Actually compose the resource string
+    return "http://"
+        + localIpResolver.lookupOwnLocalAreaNetworkIp()
+        + ":"
+        + port
+        + "/"
+        + pollId
+        + "/"
+        + resource;
+  }
 }
