@@ -41,7 +41,7 @@ public class QrImageGenerator {
    *
    * @param filename as the name of the file (without path information), inluding file extension.
    * @param qr       as the BitMatrix encoding the qrcode as object.
-   * @return the location on disk where the qr encoded file is stored.
+   * @return the absolute location on disk where the qr encoded file is stored.
    * @throws IOException in case the persistence to disk fails.
    */
   public String exportQrToDisk(String filename, BitMatrix qr) throws IOException {

@@ -3,6 +3,7 @@ package eu.kartoffelquadrat.livepoll.controllers;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WebControllers {
@@ -10,10 +11,19 @@ public class WebControllers {
   @RequestMapping("/")
   public String forwardToLanding(HttpServletRequest request) {
 
-    if (isCallFromLocalhost(request))
-      return "setup";
-    else
+    if (!isCallFromLocalhost(request))
       return "denied";
+    else
+      return "setup";
+  }
+
+  @RequestMapping("/polls/{pollid}")
+  public String accessPoll(@RequestParam String pollid, HttpServletRequest request) {
+
+    if (!isCallFromLocalhost(request))
+      return "denied";
+    else
+      return "poll";
   }
 
   /**

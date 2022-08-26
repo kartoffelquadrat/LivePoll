@@ -29,7 +29,7 @@ public class LocalResourceEncoder {
    * @return the created URL string.
    * @throws IOException in case the lookup of the localhost IP address failed.
    */
-  public String buildResourceString(long pollId, String resource) throws IOException {
+  public String buildResourceString(String pollId, String resource) throws IOException {
 
     // replace any whitespaces in resource strings
     resource = resource.replaceAll("\\s+", "-");

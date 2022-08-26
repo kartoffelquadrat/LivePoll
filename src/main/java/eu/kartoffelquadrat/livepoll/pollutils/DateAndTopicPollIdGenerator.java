@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * Extention of the PollIdGenerator abstract class. Uses a date prefix for the PollID.
  */
 @Component
-public class DateAndTopicPollIdGenerator extends PollIdGenerator {
+public class DateAndTopicPollIdGenerator implements PollIdGenerator {
 
   /**
    * Concrete implementation of the abstract superclass. Uses the date-string as prefix and topic
@@ -21,7 +21,7 @@ public class DateAndTopicPollIdGenerator extends PollIdGenerator {
   public String generatePollId(String theme) {
 
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    date += hyphenize(theme);
+    date += Hyphenizer.hyphenize(theme);
     return date;
   }
 }
