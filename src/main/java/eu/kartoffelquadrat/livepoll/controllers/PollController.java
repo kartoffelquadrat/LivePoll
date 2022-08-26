@@ -9,9 +9,8 @@ import eu.kartoffelquadrat.livepoll.qrgenerator.LocalIpResolver;
 import eu.kartoffelquadrat.livepoll.qrgenerator.LocalResourceEncoder;
 import eu.kartoffelquadrat.livepoll.qrgenerator.QrImageGenerator;
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,21 +60,18 @@ public class PollController {
    */
 
   @PostMapping("/polls")
-  public String createPoll(@RequestBody Poll poll) throws IOException, WriterException {
+  public String createPoll(@RequestBody Poll poll, HttpServletRequest request)
+      throws IOException, WriterException {
 
+    // reject if this request comes from a foreign machine.
+    if (!request.getRemoteAddr().equals("127.0.0.1")) {
+      return "Go away!";
+    }
+
+    // Create new poll based on information in request payload.
     String pollId = pollManager.addPoll(poll);
     createPollQrCodes(pollId, poll);
     return pollId;
-  }
-
-  /**
-   * An actual endpoint, referenced by generated QR code. Note using Get operation here is a clear
-   * violation to the REST style, but since we want to support vote by QR scanning it has to be GET
-   * (default HTTP method for browser resource access).
-   */
-  @GetMapping("/polls/{pollid}/{vote}")
-  public String registerVote(@PathVariable("vote") String vote) {
-    return "I registered your vote \"" + vote + "\". Thank you for your participation.";
   }
 
   /**
@@ -93,7 +89,7 @@ public class PollController {
     // Create QR code for every option mentioned in poll
     for (String option : poll.getOptions()) {
 
-      // convert option to kebap notation
+      // convert option to kebab notation
       String optionResource = Hyphenizer.hyphenize(option);
 
       // Generate QR code and store on disk
