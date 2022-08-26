@@ -21,7 +21,7 @@ public class DateAndTopicPollIdGenerator implements PollIdGenerator {
   public String generatePollId(String theme) {
 
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    date += Hyphenizer.hyphenize(theme);
+    date += "-" + Hyphenizer.hyphenize(theme);
     return date;
   }
 }

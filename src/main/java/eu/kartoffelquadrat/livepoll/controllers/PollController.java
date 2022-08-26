@@ -61,7 +61,7 @@ public class PollController {
    * @throws WriterException in case the writing of a QR png file to the file system failed.
    */
 
-  @PostMapping("/polls")
+  @PostMapping(value = "/polls", consumes = "application/json; charset=utf-8")
   public String createPoll(@RequestBody Poll poll, HttpServletRequest request)
       throws IOException, WriterException {
 

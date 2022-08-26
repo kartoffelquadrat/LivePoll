@@ -1,35 +1,30 @@
 <html>
-<body>
+<head>
+    <script src="submitpoll.js"></script>
+</head>
+<body onload="registerPollSubmitButton()">
 <h1>Create new poll</h1>
 <label for="topic">Poll question:</label><br/>
 <input type="text" id="topic" name="topic">
-<br/><br/>
-
-<fieldset>
-    <legend>Poll mode:</legend>
-
-    <div>
-        <input type="radio" id="yn" name="options" value="yn"
-               checked>
-        <label for="yn">Yes / No</label>
-    </div>
-
-    <div>
-        <input type="radio" id="ymn" name="options" value="ymn">
-        <label for="ymn">Yes / Maybe / No</label>
-    </div>
-</fieldset>
 <br/>
+<br/>
+<label for="neutralallowed">Neutral votes </label>
+<input type="checkbox" id="neutralallowed" name="neutralallowed" value="Neutral Option">
+<br/><br/>
 
 <label for="option1">Positive label:</label><br/>
 <input type="text" id="option1" name="option1" value="Yes">
 <br/>
-<div id="optionaloption">
+<div id="optionaloption" style="display: none;">
     <label for="option2">Neutral label:</label><br/>
-    <input type="text" id="option2" name="option2" value="A bit">
+    <input type="text" id="option2" name="option2" value="Unsure">
     <br/>
 </div>
 <label for="option3">Negative label:</label><br/>
-<input type="text" id="option3" name="option3" value="No">
+<input type="text" id="option3" name="option3" value="No"><br/>
+
+<br/>
+<input type="submit" id="submitbutton" value="Create Poll!">
+
 </body>
 </html>

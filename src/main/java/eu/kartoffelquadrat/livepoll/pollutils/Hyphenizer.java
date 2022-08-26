@@ -19,6 +19,9 @@ public class Hyphenizer {
     // Replace all whitespaces by hyphens
     humanReadableString = humanReadableString.replaceAll("\\s+", "-");
 
+    // make all lowercase
+    humanReadableString = humanReadableString.toLowerCase();
+
     // Strip all non [a-zA-Z] or hyphen characters.
     return humanReadableString.replaceAll("\\[a-zA-Z|-]", "");
   }

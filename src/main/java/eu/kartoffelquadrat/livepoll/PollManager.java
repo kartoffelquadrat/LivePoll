@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class PollManager {
 
   private final Map<String, Poll> indexedPolls;
+
   PollIdGenerator idGenerator;
 
   /**
@@ -21,6 +22,7 @@ public class PollManager {
    */
   public PollManager(@Autowired DateAndTopicPollIdGenerator idGenerator) {
     this.indexedPolls = new LinkedHashMap<>();
+    this.idGenerator = idGenerator;
   }
 
   /**
