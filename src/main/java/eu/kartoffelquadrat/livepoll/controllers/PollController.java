@@ -52,7 +52,9 @@ public class PollController {
   }
 
   /**
-   * REST endpoint to create a new poll, based on the options provided as body payload.   *
+   * REST endpoint to create a new poll, based on the options provided as body payload.   * Expects
+   * a poll object in request body, serialized as json, e.g.: {"topic":"Are cats cooler than
+   * dogs","optionVotes":{"No":0,"Yes":0}}
    *
    * @return id of the newly created poll.
    * @throws IOException     in case the implicit lookup of the pwn webapps LAN ip failed.

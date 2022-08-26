@@ -1,5 +1,35 @@
 <html>
 <body>
-<h1>New Poll</h1>
+<h1>Create new poll</h1>
+<label for="topic">Poll question:</label><br/>
+<input type="text" id="topic" name="topic">
+<br/><br/>
+
+<fieldset>
+    <legend>Poll mode:</legend>
+
+    <div>
+        <input type="radio" id="yn" name="options" value="yn"
+               checked>
+        <label for="yn">Yes / No</label>
+    </div>
+
+    <div>
+        <input type="radio" id="ymn" name="options" value="ymn">
+        <label for="ymn">Yes / Maybe / No</label>
+    </div>
+</fieldset>
+<br/>
+
+<label for="option1">Positive label:</label><br/>
+<input type="text" id="option1" name="option1" value="Yes">
+<br/>
+<div id="optionaloption">
+    <label for="option2">Neutral label:</label><br/>
+    <input type="text" id="option2" name="option2" value="A bit">
+    <br/>
+</div>
+<label for="option3">Negative label:</label><br/>
+<input type="text" id="option3" name="option3" value="No">
 </body>
 </html>
