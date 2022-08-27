@@ -3,15 +3,24 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="../fillpollpage.js"></script>
 </head>
-<body onload="setTitle()">
-<h1 id="topicheader">Q</h1>
+<body onload="fillWithPollDetails()">
+<h1 id="topicheader">T</h1>
 
-<div style="width: 100%;">
-    <div style="width: 50%; height: 100px; float: left; background: green;">
-        Left Div
+<div class="row">
+    <div id="left" class="column" style="background-color:#aaa;">
+        <h2 id="option1">O1</h2>
+        <p>QR code here...</p>
+        <h2 id="counter1">C1</h2>
     </div>
-    <div style="margin-left: 50%; height: 100px; background: blue;">
-        Right Div
+    <div id="middle" class="column" style="background-color:#bbb;">
+        <h2 id="option2">O2</h2>
+        <p>QR code here...</p>
+        <h2 id="counter2">C1</h2>
+    </div>
+    <div id="right" class="column" style="background-color:#ccc;">
+        <h2 id="option3">O3</h2>
+        <p>QR code here...</p>
+        <h2 id="counter3">C1</h2>
     </div>
 </div>
 
