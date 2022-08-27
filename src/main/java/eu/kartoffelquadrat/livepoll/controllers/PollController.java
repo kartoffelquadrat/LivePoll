@@ -3,12 +3,14 @@ package eu.kartoffelquadrat.livepoll.controllers;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import eu.kartoffelquadrat.livepoll.Poll;
+import eu.kartoffelquadrat.livepoll.PollLauncher;
 import eu.kartoffelquadrat.livepoll.PollManager;
 import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
 import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
 import eu.kartoffelquadrat.livepoll.qrgenerator.LocalIpResolver;
 import eu.kartoffelquadrat.livepoll.qrgenerator.LocalResourceEncoder;
 import eu.kartoffelquadrat.livepoll.qrgenerator.QrImageGenerator;
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,5 +123,23 @@ public class PollController {
       String qrFileName = pollId + "-" + optionResource;
       qrImageGenerator.exportQrToDisk(qrFileName, qrMatrix);
     }
+  }
+
+  /**
+   * Helper method to get reference to this applications tempdir, where are local qr codes are
+   * stored on filesystem. Is restricted to access from localhost.
+   *
+   * @return local filesystem reference to place where all qr-codes are stored as images.
+   */
+  @GetMapping("/qrdir")
+  public String getPollQrTempDir(HttpServletRequest request) {
+
+    // reject if this request comes from a foreign machine.
+    if (!request.getRemoteAddr().equals("127.0.0.1")) {
+      return "Go away!";
+    }
+
+    // return path to local tmp dir with all qr codes
+    return PollLauncher.pollTmpDir;
   }
 }

@@ -14,9 +14,7 @@ public class AlphabetSanitizer {
   public static String sanitize(String nonAlphanumericString) {
     // strip from any non alphanumeric character except whitespace
     // https://stackoverflow.com/a/6053606
-    System.out.println("Input: " + nonAlphanumericString);
     String result = nonAlphanumericString.replaceAll("[^a-zA-Z\\d\\s:]", "");
-    System.out.println("Output: "+result);
     return result;
   }
 }

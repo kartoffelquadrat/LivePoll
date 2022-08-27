@@ -5,8 +5,11 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import eu.kartoffelquadrat.livepoll.PollLauncher;
 import java.io.File;
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class QrImageGenerator {
+
 
   @Value("${qrcode.pixel.dimensions}")
   private int pixelSize = 128;
@@ -46,8 +50,9 @@ public class QrImageGenerator {
    */
   public String exportQrToDisk(String filename, BitMatrix qr) throws IOException {
 
-    File qrFile = new File(System.getProperty("java.io.tmpdir"), filename);
+    File qrFile = new File(PollLauncher.pollTmpDir, filename+".png");
     MatrixToImageWriter.writeToPath(qr, "PNG", qrFile.toPath());
+    System.out.println(qrFile.toString());
     return qrFile.toString();
   }
 }

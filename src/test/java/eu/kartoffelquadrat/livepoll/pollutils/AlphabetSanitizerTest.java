@@ -7,7 +7,6 @@ public class AlphabetSanitizerTest {
 
   @Test
   public void sanitizeTest() {
-
     String input = "#*+!$&^ kasjdhf KJD-SHF";
     String sanitizedInput = " kasjdhf KJDSHF";
     String output = AlphabetSanitizer.sanitize(input);
