@@ -13,3 +13,14 @@ h1, h2, h3, p {
     display: table;
     clear: both;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 66%;
+}
+
+.bottom-three {
+    margin-bottom: .5cm;
+}

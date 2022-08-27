@@ -1,29 +1,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Poll</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="../styles.css">
     <script src="../fillpollpage.js"></script>
 </head>
 <body onload="removeNeutralOptionIfEmpty()">
 <h1 th:text="${topic}"></h1>
-<h3>Scan one of below QR-Codes to vote...</h3>
+<h3 class="bottom-three"> Scan one of below QR-Codes to vote...</h3>
 
 <div class="row">
-    <div id="left" class="column" style="background-color:#aaa;">
+    <div id="left" class="column" style="background-color:#fff;">
         <h2 th:text="${firstoptiontext}"></h2>
-        <p th:text="'file://'+${bufferdir}+'/'+${pollid}+'-'+${firstoptioncode}+'.png'"></p>
-        <img th:src="'/polls/'+${pollid}+'/qr/'+${firstoptioncode}">
+        <img class="center" th:src="'/polls/'+${pollid}+'/qr/'+${firstoptioncode}">
         <h2 id="counter1">-</h2>
     </div>
-    <div id="maybediv" class="column" style="background-color:#bbb;">
+    <div id="maybediv" class="column" style="background-color:#fff;">
         <h2 id="maybeoption" th:text="${maybeoptiontext}"></h2>
-        <p th:text="${bufferdir}+'/'+${pollid}+'-'+${maybeoptioncode}+'.png'"></p>
+        <img class="center" th:src="'/polls/'+${pollid}+'/qr/'+${maybeoptioncode}">
         <h2 id="counter2">-</h2>
     </div>
-    <div id="right"  class="column" style="background-color:#ccc;">
+    <div id="right" class="column" style="background-color:#fff;">
         <h2 th:text="${lastoptiontext}"></h2>
-        <p th:text="${bufferdir}+'/'+${pollid}+'-'+${lastoptioncode}+'.png'"></p>
+        <img class="center" th:src="'/polls/'+${pollid}+'/qr/'+${lastoptioncode}">
         <h2 id="counter3">-</h2>
     </div>
 </div>
