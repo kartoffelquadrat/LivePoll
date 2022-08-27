@@ -1,5 +1,17 @@
+/**
+ * must be called when form page is accessed via browser back button so form submit button is re-enabled
+ *
+ */
+function enableButtons() {
+    // Enable button so page us usable when user navigates back
+    document.getElementById("submitbutton").disabled = false;
+}
+
 function registerPollSubmitButton() {
 
+
+
+    // Register click handlers
     console.log("Registering poll submit button");
     document.getElementById("submitbutton").addEventListener("click", submitPoll)
     document.getElementById("neutralallowed").addEventListener("click", refreshOptions)
