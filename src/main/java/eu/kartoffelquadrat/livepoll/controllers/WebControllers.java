@@ -83,7 +83,7 @@ public class WebControllers {
    * violation to the REST style, but since we want to support vote by QR scanning it has to be GET
    * (default HTTP method for browser resource access).
    */
-  @GetMapping("/polls/{pollid}/{option}")
+  @GetMapping("/polls/{pollid}/options/{option}")
   public String registerVote(@PathVariable("pollid") String pollId,
                              @PathVariable("option") String option) {
 

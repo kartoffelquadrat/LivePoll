@@ -18,6 +18,15 @@ function registerPollSubmitButton() {
     document.getElementById("submitbutton").addEventListener("click", submitPoll)
     document.getElementById("neutralallowed").addEventListener("click", refreshOptions)
 
+    // Register enter in topic field
+    document.getElementById("topic").addEventListener("keyup", ({key}) => {
+        if (key === "Enter") {
+            submitPoll();
+        }
+    })
+
+    // focus on input filed by default
+    document.getElementById("topic").focus();
 }
 
 // Verifies the status fo the neutral votes checkbox and enables the thrid option text if needed.
