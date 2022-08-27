@@ -77,4 +77,16 @@ public class Poll {
     }
     return null;
   }
+
+  /**
+   * Getter to look up the amount of votes for a given option.
+   *
+   * @param option as the sanitized / hyphenized option to look up.
+   * @return the amount of votes received for this option so far.
+   */
+  public int getVotes(String option) {
+
+    String rawMatch = findRawMatch(option);
+    return optionVotes.get(rawMatch);
+  }
 }

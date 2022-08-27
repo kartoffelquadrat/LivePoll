@@ -1,3 +1,11 @@
+function assNavigateBackListener() {
+    document.addEventListener('keyup', (e) => {
+        if (e.code === "ArrowLeft")
+            window.location.href = "/";
+    });
+}
+
+
 function removeNeutralOptionIfEmpty() {
 
     // look up text of netrual option. Is empty if not needed.
@@ -18,9 +26,39 @@ function removeNeutralOptionIfEmpty() {
 
 
 function autoreload() {
-    //TODO: dont reload everything, only reload outcome.
-    // setTimeout(function(){
-    //     window.location.reload(1);
-    // }, 1000);
+    setTimeout(function () {
+        updateOutcome();
+        autoreload();
+    }, 1000);
 }
 
+function updateOutcome() {
+
+    let pollid = document.getElementById("pollid").innerText;
+    let firstoption = document.getElementById("firstoptioncode").innerText;
+    let maybeoption = document.getElementById("maybeoptioncode").innerText;
+    let lastoption = document.getElementById("lastoptioncode").innerText;
+
+    console.log("pollid: " + pollid);
+    console.log("firstoption: " + firstoption);
+    console.log("maybeoption: " + maybeoption);
+    console.log("lastoption: " + lastoption);
+
+    refreshVote(pollid, firstoption, "counter1");
+    refreshVote(pollid, lastoption, "counter3");
+
+    // only refresh neutral if exists
+    if(maybeoption)
+        refreshVote(pollid, maybeoption, "counter2");
+}
+
+function refreshVote(pollid, option, targetelement) {
+
+    fetch('/polls/' + pollid + '/outcome/' + option).then(result => result.text()).then(text => {
+            if(text >= 0)
+                document.getElementById(targetelement).textContent = text;
+            else
+                window.location.href = "/";
+        }
+    );
+}

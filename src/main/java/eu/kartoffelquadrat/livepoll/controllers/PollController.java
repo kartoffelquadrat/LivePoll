@@ -69,6 +69,25 @@ public class PollController {
         "\". Thank you for your participation. You can leave this page now. Please don't refresh the page.";
   }
 
+  /**
+   * REST endpoint to look up amount of votes per option. Endpoint is better than static rendering
+   * on server side. Only accessible from localhost.
+   */
+  @GetMapping("/polls/{pollid}/outcome/{option}")
+  public int getVoteAmount(@PathVariable("pollid") String pollId,
+                           @PathVariable("option") String option, HttpServletRequest request) {
+
+    // only treat if request form local machine and poll id valid
+    if (request.getRemoteAddr().equals("127.0.0.1")) {
+      if (pollManager.isExistentPoll(pollId)) {
+        return pollManager.getPollByIdentifier(pollId).getVotes(option);
+      }
+    }
+
+    // return bogus number instead
+    return -42;
+  }
+
 
   /**
    * REST endpoint to create a new poll, based on the options provided as body payload.   * Expects
