@@ -82,22 +82,38 @@ public class PollController {
   }
 
   /**
+   * REST endpoint to obtain details required for rendering a poll page. Returns an extended poll object (pollrenderdata) that contains additional information e.g. location of QR codes on disk.
+   *
+   * @return pollrederdata object with all details required for page rendering.
+   */
+//  @GetMapping(value = "/polls/{pollid}/renderdata", produces = "application/json; charset=utf-8")
+//  public PollRenderData getPollTitle(@PathVariable("pollid") String pollid, HttpServletRequest request) {
+//
+//    // reject if this request comes from a foreign machine.
+//    if (!request.getRemoteAddr().equals("127.0.0.1"))
+//      return null;
+//
+//    Poll poll = pollManager.getPollByIdentifier(pollid);
+//
+//  }
+
+  /**
    * REST endpoint to obtain details on an already existing poll. Can be loaded from frontend to
    * fill with poll data.
    *
    * @return poll object with all details.
    */
-  @GetMapping(value = "/polls/{pollid}/topic", produces = "application/json; charset=utf-8")
-  public String getPollTitle(@PathVariable("pollid") String pollid, HttpServletRequest request) {
-
-    // reject if this request comes from a foreign machine.
-    if (!request.getRemoteAddr().equals("127.0.0.1")) {
-      return "GO AWAY!";
-    }
-
-    // Create new poll based on information in request payload.
-    return pollManager.getPollByIdentifier(pollid).getTopic();
-  }
+//  @GetMapping(value = "/polls/{pollid}/topic", produces = "application/json; charset=utf-8")
+//  public String getPollTitle(@PathVariable("pollid") String pollid, HttpServletRequest request) {
+//
+//    // reject if this request comes from a foreign machine.
+//    if (!request.getRemoteAddr().equals("127.0.0.1")) {
+//      return "GO AWAY!";
+//    }
+//
+//    // Create new poll based on information in request payload.
+//    return pollManager.getPollByIdentifier(pollid).getTopic();
+//  }
 
   /**
    * Private helper method to generate the qrcodes for a poll option and store the qr files on
@@ -131,15 +147,15 @@ public class PollController {
    *
    * @return local filesystem reference to place where all qr-codes are stored as images.
    */
-  @GetMapping("/qrdir")
-  public String getPollQrTempDir(HttpServletRequest request) {
-
-    // reject if this request comes from a foreign machine.
-    if (!request.getRemoteAddr().equals("127.0.0.1")) {
-      return "Go away!";
-    }
-
-    // return path to local tmp dir with all qr codes
-    return PollLauncher.pollTmpDir;
-  }
+//  @GetMapping("/qrdir")
+//  public String getPollQrTempDir(HttpServletRequest request) {
+//
+//    // reject if this request comes from a foreign machine.
+//    if (!request.getRemoteAddr().equals("127.0.0.1")) {
+//      return "Go away!";
+//    }
+//
+//    // return path to local tmp dir with all qr codes
+//    return PollLauncher.pollTmpDir;
+//  }
 }

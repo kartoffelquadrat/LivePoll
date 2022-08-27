@@ -1,24 +1,27 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Poll</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../styles.css">
     <script src="../fillpollpage.js"></script>
 </head>
-<body onload="fillWithPollDetails()">
-<h1 id="topicheader">T</h1>
+<body onload="removeNeutralOptionIfEmpty()">
+<h1 th:text="${topic}"></h1>
+<h3>Scan one of below QR-Codes to vote...</h3>
 
 <div class="row">
     <div id="left" class="column" style="background-color:#aaa;">
-        <h2 id="option1">O1</h2>
+        <h2 th:text="${firstoption}"></h2>
         <p>QR code here...</p>
         <h2 id="counter1">C1</h2>
     </div>
-    <div id="middle" class="column" style="background-color:#bbb;">
-        <h2 id="option2">O2</h2>
+    <div id="maybediv" class="column" style="background-color:#bbb;">
+        <h2 id="maybeoption" th:text="${maybeoption}"></h2>
         <p>QR code here...</p>
         <h2 id="counter2">C1</h2>
     </div>
-    <div id="right" class="column" style="background-color:#ccc;">
-        <h2 id="option3">O3</h2>
+    <div id="right"  class="column" style="background-color:#ccc;">
+        <h2 th:text="${lastoption}"></h2>
         <p>QR code here...</p>
         <h2 id="counter3">C1</h2>
     </div>
