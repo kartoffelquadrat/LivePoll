@@ -50,4 +50,14 @@ public class PollManager {
     indexedPolls.put(pollId, poll);
     return pollId;
   }
+
+  /**
+   * Looks up if the given poll is known to the manager.
+   *
+   * @param pollid as the poll keyname to look up.
+   * @return true if the poll exists, false if not.
+   */
+  public boolean isExistentPoll(String pollid) {
+    return indexedPolls.containsKey(pollid);
+  }
 }

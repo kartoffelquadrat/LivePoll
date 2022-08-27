@@ -29,7 +29,12 @@ public class WebControllers {
     if (!isCallFromLocalhost(request))
       return "denied";
     else
-      return "poll";
+    {
+      if(pollManager.isExistentPoll(pollid))
+        return "poll";
+      else
+        return "redirect:/";
+    }
   }
 
   /**
