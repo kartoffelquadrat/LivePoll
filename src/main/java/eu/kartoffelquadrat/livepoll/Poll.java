@@ -1,5 +1,7 @@
 package eu.kartoffelquadrat.livepoll;
 
+import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
+import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -48,11 +50,31 @@ public class Poll {
 
 
   /**
-   * Returns vote amount for a given option.
+   * Adds a vote for a given option.
    *
    * @param option the string for the selected poll response option.
    */
-  public int voteForOption(String option) {
-    return optionVotes.get(option);
+  public void voteForOption(String option) {
+
+    String rawOptionMatch = findRawMatch(option);
+    optionVotes.put(rawOptionMatch, optionVotes.get(rawOptionMatch) + 1);
+  }
+
+  /**
+   * Helper method to find the raw option (option in human readable form) that matches a porivided
+   * sanitized from, as e g received from a QR code.
+   *
+   * @param sanitized the sanitized asn hyphenized option to look up
+   * @return the human readable string option the provided sanitized option
+   */
+  private String findRawMatch(String sanitized) {
+    // options in poll object are not encoded in sanitize / hyphenized form. Must iterate to lookup.
+    for (String rawOption : optionVotes.keySet()) {
+
+      if (Hyphenizer.hyphenize(AlphabetSanitizer.sanitize(rawOption)).equals(sanitized)) {
+        return rawOption;
+      }
+    }
+    return null;
   }
 }

@@ -41,7 +41,7 @@ public class LocalResourceEncoder {
         + port
         + "/polls/"
         + pollId
-        + "/option/"
+        + "/options/"
         + resource;
   }
 }

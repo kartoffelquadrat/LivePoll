@@ -12,12 +12,14 @@ import eu.kartoffelquadrat.livepoll.qrgenerator.QrImageGenerator;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST Controller to register votes caused by scannign of QR codes.
+ * REST Controller to register votes caused by scanning of QR codes.
  */
 @RestController
 public class PollController {
@@ -51,6 +53,22 @@ public class PollController {
     this.localIpResolver = localIpResolver;
     this.pollManager = pollManager;
   }
+
+
+  /**
+   * An actual endpoint, referenced by generated QR code. Note using Get operation here is a clear
+   * violation to the REST style, but since we want to support vote by QR scanning it has to be GET
+   * (default HTTP method for browser resource access).
+   */
+  @GetMapping("/polls/{pollid}/options/{option}")
+  public String registerVote(@PathVariable("pollid") String pollId,
+                             @PathVariable("option") String option) {
+
+    pollManager.getPollByIdentifier(pollId).voteForOption(option);
+    return "I registered your vote for \"" + option +
+        "\". Thank you for your participation. You can leave this page now. Please don't refresh the page.";
+  }
+
 
   /**
    * REST endpoint to create a new poll, based on the options provided as body payload.   * Expects

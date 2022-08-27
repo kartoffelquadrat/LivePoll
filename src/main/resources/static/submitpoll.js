@@ -8,7 +8,6 @@ function enableButtons() {
 
     // reset checkbox
     document.getElementById("neutralallowed").checked = false;
-
 }
 
 function registerPollSubmitButton() {

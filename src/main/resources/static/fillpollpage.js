@@ -16,3 +16,11 @@ function removeNeutralOptionIfEmpty() {
     }
 }
 
+
+function autoreload() {
+    //TODO: dont reload everything, only reload outcome.
+    // setTimeout(function(){
+    //     window.location.reload(1);
+    // }, 1000);
+}
+

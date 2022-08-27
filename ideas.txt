@@ -1,0 +1,2 @@
+Add buttons for quick pre-programmed polls.
+Add success thymeleaf page.

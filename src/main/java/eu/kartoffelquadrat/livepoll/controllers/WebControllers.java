@@ -79,21 +79,6 @@ public class WebControllers {
   }
 
   /**
-   * An actual endpoint, referenced by generated QR code. Note using Get operation here is a clear
-   * violation to the REST style, but since we want to support vote by QR scanning it has to be GET
-   * (default HTTP method for browser resource access).
-   */
-  @GetMapping("/polls/{pollid}/options/{option}")
-  public String registerVote(@PathVariable("pollid") String pollId,
-                             @PathVariable("option") String option) {
-
-    pollManager.getPollByIdentifier(pollId).voteForOption(option);
-    return "I registered your vote for \"" + option +
-        "\". Thank you for your participation. You can leave this page now.";
-  }
-
-
-  /**
    * Helper method to access QR code png files stored on disk. Local references are blockedc by
    * browsers security policy so we need an HTTP tunnel.
    *
