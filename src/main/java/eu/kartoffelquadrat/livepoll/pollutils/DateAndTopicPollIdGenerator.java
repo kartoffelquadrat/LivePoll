@@ -20,8 +20,10 @@ public class DateAndTopicPollIdGenerator implements PollIdGenerator {
   @Override
   public String generatePollId(String theme) {
 
+    // TODO: Sanitize topic from all non ascii characters.
+
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    date += "-" + Hyphenizer.hyphenize(theme);
+    date += "-" + Hyphenizer.hyphenize(AlphabetSanitizer.sanitize(theme));
     return date;
   }
 }

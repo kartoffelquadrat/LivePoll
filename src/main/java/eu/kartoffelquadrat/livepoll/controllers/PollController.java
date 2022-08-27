@@ -4,6 +4,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import eu.kartoffelquadrat.livepoll.Poll;
 import eu.kartoffelquadrat.livepoll.PollManager;
+import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
 import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
 import eu.kartoffelquadrat.livepoll.qrgenerator.LocalIpResolver;
 import eu.kartoffelquadrat.livepoll.qrgenerator.LocalResourceEncoder;
@@ -11,6 +12,8 @@ import eu.kartoffelquadrat.livepoll.qrgenerator.QrImageGenerator;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,6 +80,24 @@ public class PollController {
   }
 
   /**
+   * REST endpoint to obtain details on an already existing poll. Can be loaded from frontend to
+   * fill with poll data.
+   *
+   * @return poll object with all details.
+   */
+  @GetMapping(value = "/polls/{pollid}/topic", produces = "application/json; charset=utf-8")
+  public String getPollTitle(@PathVariable("pollid") String pollid, HttpServletRequest request) {
+
+    // reject if this request comes from a foreign machine.
+    if (!request.getRemoteAddr().equals("127.0.0.1")) {
+      return "GO AWAY!";
+    }
+
+    // Create new poll based on information in request payload.
+    return pollManager.getPollByIdentifier(pollid).getTopic();
+  }
+
+  /**
    * Private helper method to generate the qrcodes for a poll option and store the qr files on
    * disk.
    *
@@ -92,7 +113,7 @@ public class PollController {
     for (String option : poll.getOptions()) {
 
       // convert option to kebab notation
-      String optionResource = Hyphenizer.hyphenize(option);
+      String optionResource = Hyphenizer.hyphenize(AlphabetSanitizer.sanitize(option));
 
       // Generate QR code and store on disk
       String resourceString = localResourceEncoder.buildResourceString(pollId, optionResource);
