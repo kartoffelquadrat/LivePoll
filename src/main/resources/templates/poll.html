@@ -13,7 +13,7 @@
     <div id="left" class="column" style="background-color:#aaa;">
         <h2 th:text="${firstoptiontext}"></h2>
         <p th:text="'file://'+${bufferdir}+'/'+${pollid}+'-'+${firstoptioncode}+'.png'"></p>
-        <img th:src="'file://'+${bufferdir}+'/'+${pollid}+'-'+${firstoptioncode}+'.png'">
+        <img th:src="'/polls/'+${pollid}+'/qr/'+${firstoptioncode}">
         <h2 id="counter1">-</h2>
     </div>
     <div id="maybediv" class="column" style="background-color:#bbb;">

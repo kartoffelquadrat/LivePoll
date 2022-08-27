@@ -84,7 +84,7 @@ public class WebControllers {
    * (default HTTP method for browser resource access).
    */
   @GetMapping("/polls/{pollid}/{option}")
-  public String registerVote(@PathVariable("pollId") String pollId,
+  public String registerVote(@PathVariable("pollid") String pollId,
                              @PathVariable("option") String option) {
 
     pollManager.getPollByIdentifier(pollId).voteForOption(option);
@@ -120,7 +120,7 @@ public class WebControllers {
 
     // Return the referenced QR code
     FileInputStream in = new FileInputStream(
-        PollLauncher.pollTmpDir + pollid + "-" + option +
+        PollLauncher.pollTmpDir +'/'+ pollid + "-" + option +
             ".png");
     return IOUtils.toByteArray(in);
   }
