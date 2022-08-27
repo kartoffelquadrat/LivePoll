@@ -1,14 +1,16 @@
 package eu.kartoffelquadrat.livepoll.controllers;
 
 import eu.kartoffelquadrat.livepoll.Poll;
+import eu.kartoffelquadrat.livepoll.PollLauncher;
 import eu.kartoffelquadrat.livepoll.PollManager;
+import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
+import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WebControllers {
@@ -36,16 +38,28 @@ public class WebControllers {
       if (pollManager.isExistentPoll(pollid)) {
 
         // Store information required to render in model, so that thymeleaf can insert it (server sided)
+        model.addAttribute("bufferdir", PollLauncher.pollTmpDir);
+        model.addAttribute("pollid", pollid);
+
         Poll poll = pollManager.getPollByIdentifier(pollid);
         model.addAttribute("topic", poll.getTopic());
 
         // fill available options depending on poll characteristics
-        model.addAttribute("firstoption", poll.getOptions()[0]);
-        model.addAttribute("lastoption", poll.getOptions()[poll.getOptions().length - 1]);
+        model.addAttribute("firstoptiontext", poll.getOptions()[0]);
+        model.addAttribute("firstoptioncode",
+            Hyphenizer.hyphenize(AlphabetSanitizer.sanitize(poll.getOptions()[0])));
+        int lastOptionIndex = poll.getOptions().length - 1;
+        model.addAttribute("lastoptiontext", poll.getOptions()[lastOptionIndex]);
+        model.addAttribute("lastoptioncode",
+            Hyphenizer.hyphenize(AlphabetSanitizer.sanitize(poll.getOptions()[lastOptionIndex])));
+
         if (poll.getOptions().length == 2) {
-          model.addAttribute("maybeoption", "");
+          model.addAttribute("maybeoptiontext", "");
+          model.addAttribute("maybeoptioncode", "");
         } else if (poll.getOptions().length == 3) {
-          model.addAttribute("maybeoption", poll.getOptions()[1]);
+          model.addAttribute("maybeoptiontext", poll.getOptions()[1]);
+          model.addAttribute("maybeoptioncode",
+              Hyphenizer.hyphenize(AlphabetSanitizer.sanitize(poll.getOptions()[1])));
         } else {
           throw new RuntimeException("Only binary / tertiary polls supported for now.");
         }

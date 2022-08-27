@@ -5,11 +5,13 @@
 function enableButtons() {
     // Enable button so page us usable when user navigates back
     document.getElementById("submitbutton").disabled = false;
+
+    // reset checkbox
+    document.getElementById("neutralallowed").checked = false;
+
 }
 
 function registerPollSubmitButton() {
-
-
 
     // Register click handlers
     console.log("Registering poll submit button");
