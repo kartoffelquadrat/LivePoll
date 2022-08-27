@@ -24,7 +24,7 @@ public class WebControllers {
   }
 
   @RequestMapping("/polls/{pollid}")
-  public String accessPoll(@RequestParam String pollid, HttpServletRequest request) {
+  public String accessPoll(@PathVariable("pollid") String pollid, HttpServletRequest request) {
 
     if (!isCallFromLocalhost(request))
       return "denied";

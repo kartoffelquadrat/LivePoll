@@ -35,6 +35,10 @@ async function submitPoll() {
         return;
     }
 
+    // deactivate button to prevent further clicks
+    document.getElementById("submitbutton").disabled = true;
+
+
     // Create JSON that can be fed into CONSTRUCTOR of poll object.
     let pollFormData = {"topic": question, "options": []}
     if (document.getElementById('neutralallowed').checked) {
@@ -51,8 +55,9 @@ async function submitPoll() {
             'Content-Type': 'application/json; charset=utf-8'
         },
         body: JSON.stringify(pollFormData)
-    }).then(reply => {
-        // TODO: forward to landing QR page.
-        console.log(reply);
-    });
+    }).then(reply => reply.text())
+        .then(pollid => {
+            console.log(pollid)
+            window.location.href = "/polls/"+pollid;
+        });
 }
