@@ -7,7 +7,6 @@ import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
 import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +104,7 @@ public class WebControllers {
 
     // Return the referenced QR code
     FileInputStream in = new FileInputStream(
-        PollLauncher.pollTmpDir +'/'+ pollid + "-" + option +
+        PollLauncher.pollTmpDir + '/' + pollid + "-" + option +
             ".png");
     return IOUtils.toByteArray(in);
   }
