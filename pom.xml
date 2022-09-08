@@ -10,8 +10,8 @@
     </parent>
     <groupId>eu.kartoffelquadrat</groupId>
     <artifactId>livepoll</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>livepoll</name>
+    <version>1.1.2</version>
+    <name>LivePoll</name>
     <description>Interactive Classroom Poll Webservice</description>
 
     <properties>
