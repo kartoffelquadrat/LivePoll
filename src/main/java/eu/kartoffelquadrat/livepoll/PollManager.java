@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * Spring component responsible for storage of all polls, no matter if ongoing or terminated.
+ *
+ * @author Maximilian Schiedermeier
  */
 @Component
 public class PollManager {

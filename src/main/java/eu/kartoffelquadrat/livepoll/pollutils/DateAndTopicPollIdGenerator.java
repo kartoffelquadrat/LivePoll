@@ -5,7 +5,9 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 /**
- * Extention of the PollIdGenerator abstract class. Uses a date prefix for the PollID.
+ * Extension of the PollIdGenerator abstract class. Uses a date prefix for the PollID.
+ *
+ * @author Maximilian Schiedermeier
  */
 @Component
 public class DateAndTopicPollIdGenerator implements PollIdGenerator {

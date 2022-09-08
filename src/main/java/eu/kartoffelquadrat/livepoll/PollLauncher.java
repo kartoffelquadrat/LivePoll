@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Main launcher class.
+ *
+ * @author Maximilian Schiedermeier
  */
 @SpringBootApplication
 public class PollLauncher {

@@ -3,6 +3,8 @@ package eu.kartoffelquadrat.livepoll.pollutils;
 /**
  * PollIdGenerator interface. Decided for an interface since there might be other name generators in
  * the future, based on various criteria.
+ *
+ * @author Maximilian Schiedermeier
  */
 public interface PollIdGenerator {
 

@@ -3,6 +3,8 @@ package eu.kartoffelquadrat.livepoll.pollutils;
 /**
  * Helper class to sanitize topic strings from any characters that might be incompatible with
  * filesystem or URL-encoding.
+ *
+ * @author Maximilian Schiedermeier
  */
 public class AlphabetSanitizer {
 

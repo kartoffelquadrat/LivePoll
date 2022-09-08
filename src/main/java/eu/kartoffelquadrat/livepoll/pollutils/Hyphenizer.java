@@ -2,6 +2,8 @@ package eu.kartoffelquadrat.livepoll.pollutils;
 
 /**
  * Utils class to help convert strings into resource / file system friendly format.
+ *
+ * @author Maximilian Schiedermeier
  */
 public class Hyphenizer {
 

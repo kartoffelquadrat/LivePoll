@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * REST Controller to register votes caused by scanning of QR codes.
+ *
+ * @author Maximilian Schiedermeier
  */
 @RestController
 public class PollController {

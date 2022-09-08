@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Thymeleaf endpoint for all web controllers, is to say all resources that forward to a thymeleaf
  * template and are strictly non-REST.
+ *
+ * @author Maximilian Schiedermeier
  */
 @Controller
 public class WebControllers {

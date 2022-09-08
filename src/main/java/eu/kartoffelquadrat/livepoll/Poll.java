@@ -7,6 +7,8 @@ import java.util.Map;
 
 /**
  * Represents all static and dynmically collected data of a poll.
+ *
+ * @author Maximilian Schiedermeier
  */
 public class Poll {
 
