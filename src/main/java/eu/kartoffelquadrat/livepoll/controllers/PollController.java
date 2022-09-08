@@ -59,6 +59,10 @@ public class PollController {
    * An actual endpoint, referenced by generated QR code. Note using Get operation here is a clear
    * violation to the REST style, but since we want to support vote by QR scanning it has to be GET
    * (default HTTP method for browser resource access).
+   *
+   * @param pollId as the unique identifier of the poll for which we want to register a vote
+   * @param option as the clients vote option submitted for this call
+   * @return string confirming the successful registration of the received ballot
    */
   @GetMapping("/polls/{pollid}/options/{option}")
   public String registerVote(@PathVariable("pollid") String pollId,
@@ -73,6 +77,11 @@ public class PollController {
   /**
    * REST endpoint to look up amount of votes per option. Endpoint is better than static rendering
    * on server side. Only accessible from localhost.
+   *
+   * @param pollId  as the unique identifier of the poll for which we want to register a vote
+   * @param option  as the clients vote option submitted for this call
+   * @param request as the http connection meta bundle, providing information on the sender
+   * @return the amount of votes registered so far for the specified vote and option
    */
   @GetMapping("/polls/{pollid}/outcome/{option}")
   public int getVoteAmount(@PathVariable("pollid") String pollId,
@@ -95,6 +104,8 @@ public class PollController {
    * a poll object in request body, serialized as json, e.g.: {"topic":"Are cats cooler than
    * dogs","optionVotes":{"No":0,"Yes":0}}
    *
+   * @param poll    as request body with all input details required to create the new poll
+   * @param request as http servlet meta info object, providing information about client origin
    * @return id of the newly created poll.
    * @throws IOException     in case the implicit lookup of the pwn webapps LAN ip failed.
    * @throws WriterException in case the writing of a QR png file to the file system failed.

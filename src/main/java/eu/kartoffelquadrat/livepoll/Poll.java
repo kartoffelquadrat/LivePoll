@@ -42,7 +42,7 @@ public class Poll {
   /**
    * Returns string array with all possible options for this poll.
    *
-   * @returs all available options in order.
+   * @return all available options in order.
    */
   public String[] getOptions() {
     return optionVotes.keySet().toArray(new String[0]);

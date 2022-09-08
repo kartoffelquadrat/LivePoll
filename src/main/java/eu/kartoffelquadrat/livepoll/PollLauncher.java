@@ -21,6 +21,7 @@ public class PollLauncher {
    * Launcher class for the Live Poll webapp.
    *
    * @param args optional command line arguments. None used so far.
+   * @throws IOException in case google socket connection to determine own IP fails.
    */
   public static void main(String[] args) throws IOException {
 

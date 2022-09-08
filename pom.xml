@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>eu.kartoffelquadrat</groupId>
     <artifactId>livepoll</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>livepoll</name>
-
-
     <description>Interactive Classroom Poll Webservice</description>
-
 
     <properties>
         <java.version>11</java.version>
     </properties>
-
 
     <dependencies>
         <dependency>
@@ -49,13 +45,6 @@
             <version>3.5.0</version>
         </dependency>
 
-        <!--        Test object serialization-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.google.code.gson</groupId>-->
-        <!--            <artifactId>gson</artifactId>-->
-        <!--            <version>2.9.1</version>-->
-        <!--        </dependency>-->
-
         <!--        testing-->
         <dependency>
             <groupId>junit</groupId>
@@ -82,7 +71,7 @@
                 <configuration>
                     <fork>true</fork>
                     <mainClass>eu.kartoffelquadrat.livepoll.PollLauncher</mainClass>
-		    <finalName>livepoll</finalName>
+                    <finalName>livepoll</finalName>
                 </configuration>
                 <executions>
                     <execution>
@@ -93,11 +82,11 @@
                 </executions>
             </plugin>
 
-            <!--            Plugin to refuse build in case of checkstyle violations-->
+            <!-- Plugin to refuse build in case of checkstyle violations-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.2.0</version>
                 <configuration>
                     <configLocation>google_checks.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
@@ -110,6 +99,21 @@
                         <phase>validate</phase>
                         <goals>
                             <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- add docs -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>

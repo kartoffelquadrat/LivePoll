@@ -46,6 +46,7 @@ public class PollManager {
    * Adds a new poll to the manager. Builds a unique id using the autowired id generator.
    *
    * @param poll as the new poll to add.
+   * @return the unique poll id generated for the newly created poll.
    */
   public String addPoll(Poll poll) {
 
