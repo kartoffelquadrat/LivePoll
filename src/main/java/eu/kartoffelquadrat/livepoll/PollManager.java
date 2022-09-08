@@ -7,6 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Spring component responsible for storage of all polls, no matter if ongoing or terminated.
+ */
 @Component
 public class PollManager {
 
@@ -26,7 +29,7 @@ public class PollManager {
   }
 
   /**
-   * Getter to obtain a specific poll opbject by it's unique id.
+   * Getter to obtain a specific poll object by it's unique id.
    *
    * @param pollId as the poll id to search for during lookup.
    * @return the poll object associated to the id if found. Null instead.

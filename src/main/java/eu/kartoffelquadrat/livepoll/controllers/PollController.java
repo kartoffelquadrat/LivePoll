@@ -65,8 +65,9 @@ public class PollController {
                              @PathVariable("option") String option) {
 
     pollManager.getPollByIdentifier(pollId).voteForOption(option);
-    return "I registered your vote for \"" + option +
-        "\". Thank you for your participation. You can leave this page now. Please don't refresh the page.";
+    return "I registered your vote for \"" + option
+        + "\". Thank you for your participation. You can leave this page now. Please don't refresh"
+        + " the page.";
   }
 
   /**

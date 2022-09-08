@@ -9,11 +9,12 @@ public class AlphabetSanitizer {
   /**
    * Takes an input string and strips it from all non alphanumeric or blank characters.
    *
-   * @param nonAlphanumericString
+   * @param nonAlphanumericString as the input string to filter.
+   * @return same as input string, but without any alphanumeric characters.
    */
   public static String sanitize(String nonAlphanumericString) {
     // strip from any non alphanumeric character except whitespace
-    // https://stackoverflow.com/a/6053606
+    // see: https://stackoverflow.com/a/6053606
     String result = nonAlphanumericString.replaceAll("[^a-zA-Z\\d\\s:]", "");
     return result;
   }

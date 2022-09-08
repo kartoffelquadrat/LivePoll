@@ -18,12 +18,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * Thymeleaf endpoint for all web controllers, is to say all resources that forward to a thymeleaf
+ * template and are strictly non-REST.
+ */
 @Controller
 public class WebControllers {
 
-  @Autowired
-  PollManager pollManager;
+  final PollManager pollManager;
 
+  public WebControllers(@Autowired PollManager pollManager) {
+    this.pollManager = pollManager;
+  }
+
+  /**
+   * Root endpoint, forwards to the landing page for localhost access and rejects foreign clients.
+   *
+   * @param request as the http request object used to determine the client's origin.
+   * @return string corresponding to the target thymeleaf template.
+   */
   @RequestMapping("/")
   public String forwardToLanding(HttpServletRequest request) {
 
@@ -34,6 +47,14 @@ public class WebControllers {
     }
   }
 
+  /**
+   * Thymeleaf endpoint for a specific poll. Only accessible from localhost.
+   *
+   * @param pollid  as the id of the poll to be rendered to a webpage.
+   * @param model   as the thymeleaf model that stores variables in the server side page rendering.
+   * @param request as the http request object needed to determine the client origin.
+   * @return string corresponding to target thymeleaf template.
+   */
   @RequestMapping("/polls/{pollid}")
   public String accessPoll(@PathVariable("pollid") String pollid, Model model,
                            HttpServletRequest request) {
@@ -43,7 +64,8 @@ public class WebControllers {
     } else {
       if (pollManager.isExistentPoll(pollid)) {
 
-        // Store information required to render in model, so that thymeleaf can insert it (server sided)
+        // Store information required to render in model, so that thymeleaf can insert it (server
+        // sided)
         model.addAttribute("bufferdir", PollLauncher.pollTmpDir);
         model.addAttribute("pollid", pollid);
 
@@ -104,8 +126,7 @@ public class WebControllers {
 
     // Return the referenced QR code
     FileInputStream in = new FileInputStream(
-        PollLauncher.pollTmpDir + '/' + pollid + "-" + option +
-            ".png");
+        PollLauncher.pollTmpDir + '/' + pollid + "-" + option + ".png");
     return IOUtils.toByteArray(in);
   }
 
