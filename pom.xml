@@ -63,7 +63,9 @@
     </dependencies>
 
     <build>
+        <finalName>LivePoll</finalName>
         <plugins>
+
             <!-- Spring specific build plugin, produces self contained JAR with default launcher class.-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -71,7 +73,6 @@
                 <configuration>
                     <fork>true</fork>
                     <mainClass>eu.kartoffelquadrat.livepoll.PollLauncher</mainClass>
-                    <finalName>livepoll</finalName>
                 </configuration>
                 <executions>
                     <execution>
@@ -110,7 +111,8 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <reportOutputDirectory>${project.reporting.outputDirectory}/docs</reportOutputDirectory>
+                    <reportOutputDirectory>${project.reporting.outputDirectory}/docs
+                    </reportOutputDirectory>
                     <destDir>docs</destDir>
                 </configuration>
                 <executions>
