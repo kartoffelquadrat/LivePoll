@@ -1,10 +1,16 @@
-function assNavigateBackListener() {
+/**
+ * Registers a handler to go back to poll overview and a second one to reveal the poll counts.
+ */
+function addKeyListeners() {
     document.addEventListener('keyup', (e) => {
         if (e.code === "ArrowLeft")
             window.location.href = "/";
     });
+    document.addEventListener('keyup', (e) => {
+        if (e.code === "Space")
+            revealNumbers();
+    });
 }
-
 
 function removeNeutralOptionIfEmpty() {
 
@@ -32,6 +38,21 @@ function autoreload() {
     }, 1000);
 }
 
+function revealNumbers() {
+    console.log("Spacebar press registered!")
+
+    // Reveal the "yes" and "no" options
+    document.getElementById("counter1").style.display = null;
+    document.getElementById("counter3").style.display = null;
+
+    // Reveal the maybeoption if it exists
+    let maybeoption = document.getElementById("maybeoptioncode").innerText;
+    if (maybeoption) {
+        document.getElementById("counter2").style.display = null;
+    }
+
+}
+
 function updateOutcome() {
 
     let pollid = document.getElementById("pollid").innerText;
@@ -48,14 +69,14 @@ function updateOutcome() {
     refreshVote(pollid, lastoption, "counter3");
 
     // only refresh neutral if exists
-    if(maybeoption)
+    if (maybeoption)
         refreshVote(pollid, maybeoption, "counter2");
 }
 
 function refreshVote(pollid, option, targetelement) {
 
     fetch('/polls/' + pollid + '/outcome/' + option).then(result => result.text()).then(text => {
-            if(text >= 0)
+            if (text >= 0)
                 document.getElementById(targetelement).textContent = text;
             else
                 window.location.href = "/";

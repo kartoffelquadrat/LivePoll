@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="../fillpollpage.js"></script>
 </head>
-<body onload="removeNeutralOptionIfEmpty(), autoreload(), updateOutcome(), autoreload(), assNavigateBackListener()">
+<body onload="removeNeutralOptionIfEmpty(), autoreload(), updateOutcome(), autoreload(), addKeyListeners()">
 <h1 th:text="${topic}"></h1>
 <p style="display: none" id="pollid" th:text="${pollid}"></p>
 <h3 class="bottom-three"> Scan one of below QR-Codes to vote...</h3>
@@ -15,19 +15,19 @@
         <h2 th:text="${firstoptiontext}"></h2>
         <p style="display: none" id="firstoptioncode" th:text="${firstoptioncode}"></p>
         <img class="center" th:src="'/polls/'+${pollid}+'/qr/'+${firstoptioncode}">
-        <h4 id="counter1">0</h4>
+        <h4 style="display: none" id="counter1">0</h4>
     </div>
     <div id="maybediv" class="column" style="background-color:#fff;">
         <h2 id="maybeoption" th:text="${maybeoptiontext}"></h2>
         <p style="display: none" id="maybeoptioncode" th:text="${maybeoptioncode}"></p>
         <img class="center" th:src="'/polls/'+${pollid}+'/qr/'+${maybeoptioncode}">
-        <h4 id="counter2">0</h4>
+        <h4 style="display: none" id="counter2">0</h4>
     </div>
     <div id="right" class="column" style="background-color:#fff;">
         <h2 th:text="${lastoptiontext}"></h2>
         <p style="display: none" id="lastoptioncode" th:text="${lastoptioncode}"></p>
         <img class="center" th:src="'/polls/'+${pollid}+'/qr/'+${lastoptioncode}">
-        <h4 id="counter3">0</h4>
+        <h4 style="display: none" id="counter3">0</h4>
     </div>
 </div>
 
