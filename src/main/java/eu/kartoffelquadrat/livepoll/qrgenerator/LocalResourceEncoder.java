@@ -1,6 +1,7 @@
 package eu.kartoffelquadrat.livepoll.qrgenerator;
 
 import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +12,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class LocalResourceEncoder {
 
-  final LocalIpResolver localIpResolver;
+  final IpResolver ipResolver;
 
   @Value("${server.port}")
   String port;
 
-  public LocalResourceEncoder(LocalIpResolver localIpResolver) {
-    this.localIpResolver = localIpResolver;
+  /**
+   * Constructor for resource encoder. Consumes both implementation os op resolvers and decides at
+   * runtime which one to uise, based on porperties file.
+   *
+   * @param localIpResolver    as a resolver to retreive the LAN IP.
+   * @param externalIpResolver as a resolver to retreive the acces point IP.
+   */
+  public LocalResourceEncoder(@Value("${ip.useexternal}") boolean useExternalIp,
+                              @Autowired LocalIpResolver localIpResolver,
+                              @Autowired ExternalIpResolver externalIpResolver) {
+
+    if (useExternalIp) {
+      ipResolver = externalIpResolver;
+    } else {
+      ipResolver = localIpResolver;
+    }
   }
 
   /**
@@ -35,13 +50,7 @@ public class LocalResourceEncoder {
     resource = resource.replaceAll("\\s+", "-");
 
     // Actually compose the resource string
-    return "http://"
-        + localIpResolver.lookupOwnLocalAreaNetworkIp()
-        + ":"
-        + port
-        + "/polls/"
-        + pollId
-        + "/options/"
+    return "http://" + ipResolver.lookupIp() + ":" + port + "/polls/" + pollId + "/options/"
         + resource;
   }
 }

@@ -3,6 +3,7 @@ package eu.kartoffelquadrat.livepoll.qrgenerator;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 
@@ -12,7 +13,8 @@ import org.springframework.stereotype.Component;
  * of the first one indexed by the OS is returned.
  */
 @Component
-public class LocalIpResolver {
+@Qualifier("localIpResolver")
+public class LocalIpResolver implements IpResolver {
 
   /**
    * Helper method to look up that LAN IP address of the default network card used for internet
@@ -22,7 +24,7 @@ public class LocalIpResolver {
    * @return The LAN IP address.
    * @throws IOException in case the socket creation to "google.com" failed.
    */
-  public String lookupOwnLocalAreaNetworkIp() throws IOException {
+  public String lookupIp() throws IOException {
 
     // Open a socket connection to google to look up network information.
     Socket socket = new Socket();
