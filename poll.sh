@@ -34,23 +34,34 @@ java -jar ~/Code/LivePoll/target/LivePoll.jar &
 read -p "Press enter to open next poll"
 startPoll "How did the Library and Bank exercise go?"  "Gave it an honest try" "Just read the solution" "There was homework?"
 
+# Library and Bank exercise recap
 read -p "Press enter to open next poll"
-startDualPoll "For solving the Bank and Library example, the regular lecture time was" "Sufficient" "Insufficient"
+startPoll "How did the Maven exercise go?"  "Finished in class" "Finished at home" "Did not finish"
 
-read -p "Press enter to open next poll"
-startDualPoll "We've seen two kinds of behavioural models, sequence diagrams and ... Diagrams" "Communication" "Collaboration"
 
-read -p "Press enter to open next poll"
-startPoll "In a SD, a box with the statement:  boolean foo := false  indicates... " "Comparison"  "Condition" "Assignment"
 
-read -p "Press enter to open next poll"
-startPoll "Which Spring Annotation comes closest to the CD <<System-Wide>> stereotype?" "@Singleton" "@Controller" "@Component"
 
-read -p "Press enter to open next poll"
-startPoll "Which diagrams are not directly relevant for the creation of SDs?" "Operation Models" "Use Case Models" "Class Diagrams"
+# Library and Bank exercise recap
+#read -p "Press enter to open next poll"
+#startPoll "How did the Library and Bank exercise go?"  "Gave it an honest try" "Just read the solution" "There was homework?"
 
-read -p "Press enter to open next poll"
-startPoll "Which diagrams are not directly relevant for the creation of CDs?" "Operation Models" "Envrionment Models" "Domain Models"
+#read -p "Press enter to open next poll"
+#startDualPoll "For solving the Bank and Library example, the regular lecture time was" "Sufficient" "Insufficient"
+
+#read -p "Press enter to open next poll"
+#startDualPoll "We've seen two kinds of behavioural models, sequence diagrams and ... Diagrams" "Communication" "Collaboration"
+
+#read -p "Press enter to open next poll"
+#startPoll "In a SD, a box with the statement:  boolean foo := false  indicates... " "Comparison"  "Condition" "Assignment"
+
+#read -p "Press enter to open next poll"
+#startPoll "Which Spring Annotation comes closest to the CD <<System-Wide>> stereotype?" "@Singleton" "@Controller" "@Component"
+
+#read -p "Press enter to open next poll"
+#startPoll "Which diagrams are not directly relevant for the creation of SDs?" "Operation Models" "Use Case Models" "Class Diagrams"
+
+#read -p "Press enter to open next poll"
+#startPoll "Which diagrams are not directly relevant for the creation of CDs?" "Operation Models" "Envrionment Models" "Domain Models"
 
 
 ## SD follow up and CD recap
