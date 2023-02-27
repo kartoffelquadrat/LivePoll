@@ -30,13 +30,73 @@ sleep 1
 java -jar ~/Code/LivePoll/target/LivePoll.jar &
 
 
-# Library and Bank exercise recap
-read -p "Press enter to open next poll"
-startPoll "How did the Library and Bank exercise go?"  "Gave it an honest try" "Just read the solution" "There was homework?"
+# Docker Recap
 
-# Library and Bank exercise recap
 read -p "Press enter to open next poll"
-startPoll "How did the Maven exercise go?"  "Finished in class" "Finished at home" "Did not finish"
+startPoll "Which of the following is true about emulation and simulation" "Identical" "Emul. is for HW, Simul. for SW" "Emul. = Simul. of existing HW"
+
+read -p "Press enter to open next poll"
+startPoll "Which Dockerfile instruction is excuted during image build?" "RUN" "CMD" "MVN"
+
+read -p "Press enter to open next poll"
+startPoll "Which relation of Dockerfiles and Docker images is true" "They are the same" "Dockerfiles depend on Images" "Images depend on Dockerfiles"
+
+read -p "Press enter to open next poll"
+startDualPoll "A Docker container depending on the linux kernel cannot run on Mac/Windows" "Correct" "Not correct"
+
+read -p "Press enter to open next poll"
+startDualPoll "All docker containers require a host linux kernel" "Correct" "Not correct"
+
+read -p "Press enter to open next poll"
+startDualPoll "A Docker container created from an x86 processor image cannot run on an ARM chip" "Correct" "Not correct"
+
+read -p "Press enter to open next poll"
+startDualPoll "When running a Java Service from a docker container it is better to..." "Build outside, run inside" "Build inside, run inside"
+
+read -p "Press enter to open next poll"
+startDualPoll "It is possible to use multiple images within a Dockerfile" "Correct" "Not correct"
+
+read -p "Press enter to open next poll"
+startPoll "GitHub actions always..." "Execute server sided" "Compile your code in a VM" "Test your code"
+
+read -p "Press enter to open next poll"
+startDualPoll "It is impossible to use a library JAR in a maven project" "Correct" "Not Correct"
+
+read -p "Press enter to open next poll"
+startPoll "I think this course needs..." "More polls" "More slides" "More exercises"
+
+exit 255
+
+# Maven recap
+#read -p "Press enter to open next poll"
+#startPoll "How did the Library and Bank exercise go?"  "Gave it an honest try" "Just read the solution" "There was homework?"
+
+#read -p "Press enter to open next poll"
+#startPoll "How did the Maven exercise go?"  "Finished in class" "Finished at home" "Did not finish"
+
+#read -p "Press enter to open next poll"
+#startPoll "Which of the following is NOT considered a CI activity" "Testing" "Checkstyle" "Coding"
+
+#read -p "Press enter to open next poll"
+#startPoll "Why is it not sufficient to run the CI pipeline locally" "Unreliable tests" "Pipeline can be skipped" "Different code formatting"
+
+#read -p "Press enter to open next poll"
+#startPoll "GitHub actions always..." "Execute server sided" "Compile your code in a VM" "Test your code"
+
+#read -p "Press enter to open next poll"
+#startPoll "When you drag a JAR into the IDE..." "The JAR is added to the repo" "The JAR is added to the classpath" "A maven dependency is added"
+
+#read -p "Press enter to open next poll"
+#startPoll "The pom.xml is... " "an overly complicated way to do simple things." "a model." "written in java."
+
+#read -p "Press enter to open next poll"
+#startPoll "Which is not a maven lifecycle?" "clean" "package" "site"
+
+read -p "Press enter to open next poll"
+startDualPoll "When searching for a dependency, maven first..." "searches the local repo" "searches the online repo"
+
+
+
 
 
 
