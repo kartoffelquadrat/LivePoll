@@ -34,3 +34,19 @@ h4 {
 .bottom-three {
     margin-bottom: .5cm;
 }
+
+.menuoption {
+    display: inline-block;
+    border-radius: 2rem;
+    background: #99c1ee;
+    padding: 20px;
+    width: 22%;
+    border: 1rem;
+    aspect-ratio: 2 / 1;
+    transition: 0.3s;
+}
+
+.menuoption:hover {
+    background-color: #88abd2;
+    /*color: white;*/
+}

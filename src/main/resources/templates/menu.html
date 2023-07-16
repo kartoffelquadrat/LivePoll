@@ -1,14 +1,19 @@
 <html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <script src="submitpoll.js"></script>
+    <title>Poll</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+<body onload="assignMenuHandlers()">
+<br/>
 <h1>LivePoll Menu</h1>
-<div>
-    Options:</br>
-    <li><a href="/quick">Instant poll, manually type your question.</a></li>
-    <li><a href="/load">Loaded poll, a series of prepared questions.</a></li>
+<div style='text-align:center;'>
+    <div class="menuoption" onclick="window.location.href = 'quick'"><h2>
+        Instant Poll</h2><br/>Manually create a one-shot poll.</a></div>
+    <div class="menuoption" onclick="window.location.href = 'load'"><h2>
+        Load Poll</h2><br/>Load a prepared
+        poll series.</a></div>
 </div>
 </body>
 </html>
