@@ -34,18 +34,34 @@ public class WebControllers {
   }
 
   /**
-   * Root endpoint, forwards to the landing page for localhost access and rejects foreign clients.
+   * Root menu endpoint. Only available to localhsot.
    *
-   * @param request as the http request object used to determine the client's origin.
-   * @return string corresponding to the target thymeleaf template.
+   * @param request
+   * @return
    */
-  @RequestMapping("/menu")
-  public String forwardToLanding(HttpServletRequest request) {
+  @RequestMapping("/")
+  public String forwardToMenu(HttpServletRequest request) {
 
     if (!isCallFromLocalhost(request)) {
       return "denied";
     } else {
-      return "setup";
+      return "menu";
+    }
+  }
+
+  /**
+   * Quick poll endpoint, only accessible for localhost access / rejects foreign clients.
+   *
+   * @param request as the http request object used to determine the client's origin.
+   * @return string corresponding to the target thymeleaf template.
+   */
+  @RequestMapping("/quick")
+  public String quickPoll(HttpServletRequest request) {
+
+    if (!isCallFromLocalhost(request)) {
+      return "denied";
+    } else {
+      return "quick";
     }
   }
 

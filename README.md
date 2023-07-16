@@ -42,7 +42,7 @@ source code and instrutions for a *LivePoll*, a lightweight technical polling ap
   WEB (all these are GET, and produce webpage replies)
      - /               => Landing page, chose your activity
      - /quick          => "QuickPoll: Type your question for a fast, single-shot poll"
-     -/polls/{pollid} => Rendered page showing question and QR code voting options and stats.
+     - /polls/{pollid} => Rendered page showing question and QR code voting options and stats.
                       (This page is restricted to LOCALHOST)
      - /polls/{pollid}/qr/{option} => Cast vote and retrieve ACK message. In a true REST service 
      this would be a Put/Post option, but for simplicity we use the phones implicitly website GET to cast a vote.
