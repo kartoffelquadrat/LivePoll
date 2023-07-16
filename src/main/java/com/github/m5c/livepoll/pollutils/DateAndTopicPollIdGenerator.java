@@ -1,4 +1,4 @@
-package eu.kartoffelquadrat.livepoll.pollutils;
+package com.github.m5c.livepoll.pollutils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package eu.kartoffelquadrat.livepoll.qrgenerator;
+package com.github.m5c.livepoll.qrgenerator;
 
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;

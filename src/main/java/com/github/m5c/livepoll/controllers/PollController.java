@@ -1,14 +1,14 @@
-package eu.kartoffelquadrat.livepoll.controllers;
+package com.github.m5c.livepoll.controllers;
 
+import com.github.m5c.livepoll.Poll;
+import com.github.m5c.livepoll.PollManager;
+import com.github.m5c.livepoll.pollutils.AlphabetSanitizer;
+import com.github.m5c.livepoll.pollutils.Hyphenizer;
+import com.github.m5c.livepoll.qrgenerator.LocalIpResolver;
+import com.github.m5c.livepoll.qrgenerator.LocalResourceEncoder;
+import com.github.m5c.livepoll.qrgenerator.QrImageGenerator;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import eu.kartoffelquadrat.livepoll.Poll;
-import eu.kartoffelquadrat.livepoll.PollManager;
-import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
-import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
-import eu.kartoffelquadrat.livepoll.qrgenerator.LocalIpResolver;
-import eu.kartoffelquadrat.livepoll.qrgenerator.LocalResourceEncoder;
-import eu.kartoffelquadrat.livepoll.qrgenerator.QrImageGenerator;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

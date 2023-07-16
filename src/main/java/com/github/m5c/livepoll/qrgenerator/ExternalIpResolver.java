@@ -1,4 +1,4 @@
-package eu.kartoffelquadrat.livepoll.qrgenerator;
+package com.github.m5c.livepoll.qrgenerator;
 
 import java.io.BufferedReader;
 import java.io.IOException;

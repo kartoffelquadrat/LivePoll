@@ -1,10 +1,10 @@
-package eu.kartoffelquadrat.livepoll.controllers;
+package com.github.m5c.livepoll.controllers;
 
-import eu.kartoffelquadrat.livepoll.Poll;
-import eu.kartoffelquadrat.livepoll.PollLauncher;
-import eu.kartoffelquadrat.livepoll.PollManager;
-import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
-import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
+import com.github.m5c.livepoll.Poll;
+import com.github.m5c.livepoll.PollLauncher;
+import com.github.m5c.livepoll.PollManager;
+import com.github.m5c.livepoll.pollutils.AlphabetSanitizer;
+import com.github.m5c.livepoll.pollutils.Hyphenizer;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;

@@ -1,7 +1,7 @@
-package eu.kartoffelquadrat.livepoll;
+package com.github.m5c.livepoll;
 
-import eu.kartoffelquadrat.livepoll.pollutils.DateAndTopicPollIdGenerator;
-import eu.kartoffelquadrat.livepoll.pollutils.PollIdGenerator;
+import com.github.m5c.livepoll.pollutils.DateAndTopicPollIdGenerator;
+import com.github.m5c.livepoll.pollutils.PollIdGenerator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;

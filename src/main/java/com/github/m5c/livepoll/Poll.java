@@ -1,7 +1,7 @@
-package eu.kartoffelquadrat.livepoll;
+package com.github.m5c.livepoll;
 
-import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
-import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
+import com.github.m5c.livepoll.pollutils.AlphabetSanitizer;
+import com.github.m5c.livepoll.pollutils.Hyphenizer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

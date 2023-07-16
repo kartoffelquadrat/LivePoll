@@ -1,4 +1,4 @@
-package eu.kartoffelquadrat.livepoll;
+package com.github.m5c.livepoll;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package eu.kartoffelquadrat.livepoll.pollutils;
+package com.github.m5c.livepoll.pollutils;
 
 /**
  * Utils class to help convert strings into resource / file system friendly format.

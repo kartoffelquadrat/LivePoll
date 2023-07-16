@@ -1,4 +1,4 @@
-package eu.kartoffelquadrat.livepoll.pollutils;
+package com.github.m5c.livepoll.pollutils;
 
 /**
  * Helper class to sanitize topic strings from any characters that might be incompatible with

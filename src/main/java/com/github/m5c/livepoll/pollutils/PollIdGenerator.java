@@ -1,4 +1,4 @@
-package eu.kartoffelquadrat.livepoll.pollutils;
+package com.github.m5c.livepoll.pollutils;
 
 /**
  * PollIdGenerator interface. Decided for an interface since there might be other name generators in
