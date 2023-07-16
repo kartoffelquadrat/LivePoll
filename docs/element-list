@@ -1,4 +1,4 @@
-eu.kartoffelquadrat.livepoll
-eu.kartoffelquadrat.livepoll.controllers
-eu.kartoffelquadrat.livepoll.pollutils
-eu.kartoffelquadrat.livepoll.qrgenerator
+com.github.m5c.livepoll
+com.github.m5c.livepoll.controllers
+com.github.m5c.livepoll.pollutils
+com.github.m5c.livepoll.qrgenerator

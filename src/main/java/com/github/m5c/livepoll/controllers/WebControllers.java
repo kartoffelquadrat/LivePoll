@@ -62,7 +62,9 @@ public class WebControllers {
                            HttpServletRequest request) {
 
     // TODO: figure out if you can define a @preauthorize role for that.
-    // TODO: figure out if this causes issues with external IP combo (depends on significance of external IP, presumably, if only the clients are remote, there is no issue. Only is a porblem if the SERVER if remote and not on same machine as lecturers browser).
+    // TODO: figure out if this causes issues with external IP combo (depends on significance of
+    //  external IP, presumably, if only the clients are remote, there is no issue. Only is a
+    //  porblem if the SERVER if remote and not on same machine as lecturers browser).
     // e.g. : https://stackoverflow.com/a/34411560
     if (!isCallFromLocalhost(request)) {
       return "denied";

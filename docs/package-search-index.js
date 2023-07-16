@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"eu.kartoffelquadrat.livepoll"},{"l":"eu.kartoffelquadrat.livepoll.controllers"},{"l":"eu.kartoffelquadrat.livepoll.pollutils"},{"l":"eu.kartoffelquadrat.livepoll.qrgenerator"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.github.m5c.livepoll"},{"l":"com.github.m5c.livepoll.controllers"},{"l":"com.github.m5c.livepoll.pollutils"},{"l":"com.github.m5c.livepoll.qrgenerator"}]
