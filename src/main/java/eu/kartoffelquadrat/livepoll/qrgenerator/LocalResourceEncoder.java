@@ -21,6 +21,9 @@ public class LocalResourceEncoder {
    * Constructor for resource encoder. Consumes both implementation os op resolvers and decides at
    * runtime which one to uise, based on porperties file.
    *
+   * @param useExternalIp      as flag to indicate whether the LAN or ISP assigned IP should be
+   *                           encoded in barcodes. In most cases it is recommended to use the
+   *                           internal LAN IP, as this services is intended for use via intranet.
    * @param localIpResolver    as a resolver to retreive the LAN IP.
    * @param externalIpResolver as a resolver to retreive the acces point IP.
    */
