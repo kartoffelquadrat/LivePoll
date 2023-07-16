@@ -1,4 +1,4 @@
-package eu.kartoffelquadrat.livepoll.pollutils;
+package com.github.m5c.livepoll.pollutils;
 
 import org.junit.Assert;
 import org.junit.Test;
