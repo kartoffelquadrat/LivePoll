@@ -39,7 +39,7 @@ public class WebControllers {
    * @param request as the http request object used to determine the client's origin.
    * @return string corresponding to the target thymeleaf template.
    */
-  @RequestMapping("/")
+  @RequestMapping("/menu")
   public String forwardToLanding(HttpServletRequest request) {
 
     if (!isCallFromLocalhost(request)) {
@@ -61,6 +61,9 @@ public class WebControllers {
   public String accessPoll(@PathVariable("pollid") String pollid, Model model,
                            HttpServletRequest request) {
 
+    // TODO: figure out if you can define a @preauthorize role for that.
+    // TODO: figure out if this causes issues with external IP combo (depends on significance of external IP, presumably, if only the clients are remote, there is no issue. Only is a porblem if the SERVER if remote and not on same machine as lecturers browser).
+    // e.g. : https://stackoverflow.com/a/34411560
     if (!isCallFromLocalhost(request)) {
       return "denied";
     } else {
@@ -102,8 +105,9 @@ public class WebControllers {
   }
 
   /**
-   * Helper method to access QR code png files stored on disk. Local references are blockedc by
-   * browsers security policy so we need an HTTP tunnel.
+   * Helper method to access QR code png files stored on disk. Local references are blocked by
+   * browsers security policy, so we need an HTTP tunnel (reexposure of file on disk as web
+   * resource).
    *
    * @param pollid  as the id of the qr code option to look up
    * @param option  as the selected vote option
@@ -112,14 +116,10 @@ public class WebControllers {
    * @return ByteStream of QR png with required Meta media type.
    * @throws IOException in case the file is not found / cannot be read.
    */
-  @GetMapping(
-      value = "/polls/{pollid}/qr/{option}",
-      produces = MediaType.IMAGE_PNG_VALUE
-  )
-  public @ResponseBody
-  byte[] getImageWithMediaType(@PathVariable("pollid") String pollid,
-                               @PathVariable("option") String option, HttpServletRequest request)
-      throws IOException {
+  @GetMapping(value = "/polls/{pollid}/qr/{option}", produces = MediaType.IMAGE_PNG_VALUE)
+  public @ResponseBody byte[] getImageWithMediaType(@PathVariable("pollid") String pollid,
+                                                    @PathVariable("option") String option,
+                                                    HttpServletRequest request) throws IOException {
 
     // dont accept calls from elsewhere
     if (!isCallFromLocalhost(request)) {
@@ -127,8 +127,8 @@ public class WebControllers {
     }
 
     // Return the referenced QR code
-    FileInputStream in = new FileInputStream(
-        PollLauncher.pollTmpDir + '/' + pollid + "-" + option + ".png");
+    FileInputStream in =
+        new FileInputStream(PollLauncher.pollTmpDir + '/' + pollid + "-" + option + ".png");
     return IOUtils.toByteArray(in);
   }
 
@@ -140,6 +140,7 @@ public class WebControllers {
    * @return true if the request origin is localhost, false otherwise.
    */
   private boolean isCallFromLocalhost(HttpServletRequest request) {
+    // TODO: replace by @PreAuthorize annotation.
     return request.getRemoteAddr().equals("127.0.0.1");
   }
 }
