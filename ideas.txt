@@ -1,3 +1,6 @@
-Add buttons for quick pre-programmed polls.
-Add success thymeleaf page.
-Add optino to feed questino from prepared file
+Menu bar, or at least home button, that figures on all slides.
+
+For quick poll, set right answer to undefined, to not create solution field. (as i explain on the fly. or at least allow for leaving empty)
+
+Every poll currently has its own URL.
+Would make sense to consider packs as a series of URLs? / are initiated once and every poll redirects to next on end?

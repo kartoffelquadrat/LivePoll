@@ -15,6 +15,9 @@ public class Poll {
   private final String topic;
   private final Map<String, Integer> optionVotes;
 
+  // TODO: add field for correct option index.
+  // TODO: add field for explanation of correct option.
+
 
   /**
    * Constructor. Sets up topic and options/vote-amount map.

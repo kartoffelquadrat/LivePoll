@@ -69,8 +69,8 @@ async function submitPoll() {
         pollFormData.options = [positiveLabel, negativeLabel];
     }
 
+    // Create new poll at backend
     console.log(pollFormData);
-
     fetch('/polls/', {
         method: 'post',
         headers: {
@@ -80,6 +80,8 @@ async function submitPoll() {
     }).then(reply => reply.text())
         .then(pollid => {
             console.log(pollid)
+
+            // Forword to URL of new poll
             window.location.href = "/polls/"+pollid;
         });
 }
