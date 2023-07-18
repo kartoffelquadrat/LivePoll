@@ -66,6 +66,22 @@ public class WebControllers {
   }
 
   /**
+   * Quick poll endpoint, only accessible for localhost access / rejects foreign clients.
+   *
+   * @param request as the http request object used to determine the client's origin.
+   * @return string corresponding to the target thymeleaf template.
+   */
+  @RequestMapping("/load")
+  public String loadPack(HttpServletRequest request) {
+
+    if (!isCallFromLocalhost(request)) {
+      return "denied";
+    } else {
+      return "load";
+    }
+  }
+
+  /**
    * Thymeleaf endpoint for a specific poll. Only accessible from localhost.
    *
    * @param pollid  as the id of the poll to be rendered to a webpage.
