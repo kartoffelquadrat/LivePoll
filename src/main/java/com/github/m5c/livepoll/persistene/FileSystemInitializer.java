@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 public class FileSystemInitializer {
 
   // Inject base dir value from property file
-  @Value("${base.dir}")
   private String baseDir;
 
   private final DateAndTopicIdGenerator idGenerator;
@@ -30,9 +29,10 @@ public class FileSystemInitializer {
   private final PackIO packIO;
 
   public FileSystemInitializer(@Autowired DateAndTopicIdGenerator idGenerator,
-                               @Autowired PackIO packIO) {
+                               @Autowired PackIO packIO, @Value("${base.dir}") String baseDir) {
     this.idGenerator = idGenerator;
     this.packIO = packIO;
+    this.baseDir = baseDir;
   }
 
   /**
@@ -44,7 +44,8 @@ public class FileSystemInitializer {
   public void ensureBaseDirIsReady() throws IOException {
 
     // Ensure the required file / directory structure is present.
-    File baseDirFile = new File(System.getProperty("user.home") + "/" + baseDir);
+    String prefix=(baseDir.startsWith("/")?"":System.getProperty("user.home"));
+    File baseDirFile = new File( prefix+ "/" + baseDir);
     File configfileFile = new File(baseDirFile.getPath() + "/config.properties");
     File packsDirFile = new File(baseDirFile.getPath() + "/packs");
 

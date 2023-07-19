@@ -3,6 +3,7 @@ package com.github.m5c.livepoll.persistence;
 import com.github.m5c.livepoll.Pack;
 import com.github.m5c.livepoll.Poll;
 import com.github.m5c.livepoll.persistene.PackIO;
+import com.github.m5c.livepoll.pollutils.DateAndTopicIdGenerator;
 import java.io.IOException;
 import java.util.LinkedList;
 import org.junit.Assert;
@@ -31,7 +32,8 @@ public class PackIOTest {
     packIO.persistPackToDisk(samplePack);
 
     // Test load
-    Pack loadedPack = packIO.loadPackFromDisk("2023-07-19-sample-pack.json");
+    String date = DateAndTopicIdGenerator.getFormattedDate();
+    Pack loadedPack = packIO.loadPackFromDisk(date+"-sample-pack.json");
     System.out.println(loadedPack);
 
     // Verify content of deserialized pack
