@@ -15,8 +15,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class PackIO {
 
-  @Value("${base.dir}")
-  String baseDir;
+  private final String baseDir;
+
+  public PackIO(@Value("${base.dir}") String baseDir) {
+    this.baseDir = baseDir;
+  }
 
   public void persistPackToDisk(Pack pack) throws IOException {
 
