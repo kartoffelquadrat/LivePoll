@@ -6,7 +6,7 @@ package com.github.m5c.livepoll.pollutils;
  *
  * @author Maximilian Schiedermeier
  */
-public interface PollIdGenerator {
+public interface IdGenerator {
 
   /**
    * Abstract method to create poll id based on implementing classes algorithm and provided theme.
@@ -14,5 +14,5 @@ public interface PollIdGenerator {
    * @param theme as a string describing the polls topic in human readable language.
    * @return unique id for this poll, based on the concrete implementation fo this abstract class.
    */
-  String generatePollId(String theme);
+  String generateId(String theme);
 }

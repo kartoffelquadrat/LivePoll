@@ -1,7 +1,7 @@
 package com.github.m5c.livepoll;
 
-import com.github.m5c.livepoll.pollutils.DateAndTopicPollIdGenerator;
-import com.github.m5c.livepoll.pollutils.PollIdGenerator;
+import com.github.m5c.livepoll.pollutils.DateAndTopicIdGenerator;
+import com.github.m5c.livepoll.pollutils.IdGenerator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class PollManager {
 
   private final Map<String, Poll> indexedPolls;
 
-  PollIdGenerator idGenerator;
+  IdGenerator idGenerator;
 
   /**
    * PollManager constructor.
@@ -25,7 +25,7 @@ public class PollManager {
    * @param idGenerator id generator that provides index strings for polls that are offered to the
    *                    manager.
    */
-  public PollManager(@Autowired DateAndTopicPollIdGenerator idGenerator) {
+  public PollManager(@Autowired DateAndTopicIdGenerator idGenerator) {
     this.indexedPolls = new LinkedHashMap<>();
     this.idGenerator = idGenerator;
   }
@@ -52,7 +52,7 @@ public class PollManager {
    */
   public String addPoll(Poll poll) {
 
-    String pollId = idGenerator.generatePollId(poll.getTopic());
+    String pollId = idGenerator.generateId(poll.getTopic());
     indexedPolls.put(pollId, poll);
     return pollId;
   }

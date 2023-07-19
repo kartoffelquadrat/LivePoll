@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author Maximilian Schiedermeier
  */
 @Component
-public class DateAndTopicPollIdGenerator implements PollIdGenerator {
+public class DateAndTopicIdGenerator implements IdGenerator {
 
   /**
    * Concrete implementation of the abstract superclass. Uses the date-string as prefix and topic
@@ -20,12 +20,14 @@ public class DateAndTopicPollIdGenerator implements PollIdGenerator {
    * @return kebap notated concatenation of YYYY-MM-DD and the topic.
    */
   @Override
-  public String generatePollId(String theme) {
+  public String generateId(String theme) {
 
-    // TODO: Sanitize topic from all non ascii characters.
-
-    String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    String date = getFormattedDate();
     date += "-" + Hyphenizer.hyphenize(AlphabetSanitizer.sanitize(theme));
     return date;
+  }
+
+  public static String getFormattedDate() {
+     return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
   }
 }
