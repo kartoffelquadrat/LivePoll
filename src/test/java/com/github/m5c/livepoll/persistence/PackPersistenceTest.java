@@ -11,10 +11,7 @@ import org.junit.Test;
 
 public class PackPersistenceTest {
 
-  @Test
-  public void persistAndLoadTestPack() throws IOException {
-
-    PackPersistence packPersistence = new PackPersistence(System.getProperty("java.io.tmpdir"));
+  private void persisteTestPack(PackPersistence packPersistence) throws IOException {
 
     // Create sample pack
     Poll poll1 =
@@ -31,6 +28,15 @@ public class PackPersistenceTest {
 
     // Test persist
     packPersistence.persistPackToDisk(samplePack);
+  }
+
+  @Test
+  public void persistAndLoadTestPack() throws IOException {
+
+    PackPersistence packPersistence = new PackPersistence(System.getProperty("java.io.tmpdir"));
+
+    // Create test pack on disk (test dir)
+    persisteTestPack(packPersistence);
 
     // Test load
     String date = DateAndTopicIdGenerator.getFormattedDate();
@@ -42,4 +48,6 @@ public class PackPersistenceTest {
         "Amount of questions in deserialized Pack does not match the one of original.", 2,
         loadedPack.getQuestions().size());
   }
+
+  // TODO: CREATE NEW TEST FOR LAODING MAP WITH ALL METAS
 }

@@ -1,10 +1,14 @@
 package com.github.m5c.livepoll.persistence;
 
 import com.github.m5c.livepoll.Pack;
+import com.github.m5c.livepoll.PackMeta;
 import com.github.m5c.livepoll.pollutils.Hyphenizer;
 import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Iterator;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -40,6 +44,32 @@ public class PackPersistence {
 
     // Save to disk
     FileUtils.writeStringToFile(samplePackFile, serializedPack);
+  }
+
+  /**
+   * Searches the configured basedir for persisted packs and creates an indexed map for each. The
+   * map translates from PackMeta object to the filename of the associated pack.
+   *
+   * @return Map of all PackMetas to the correpsonding Pack's filename on disk.
+   */
+  public Map<PackMeta, String> loadAllPackMetas() throws IOException {
+
+    // Preapre result map. Will be filled further down in this method.
+    Map<PackMeta, String> packMetas = new LinkedHashMap<>();
+
+    // Create file for dir on disk with all packs
+    File packDir = new File(baseDir + "/packs");
+
+    // Iterate non-recursivley over all JSON files in pack directory.
+    Iterator<File> packFileIterator = FileUtils.iterateFiles(packDir, new String[] {"json"}, false);
+    while (packFileIterator.hasNext()) {
+      // load pack, extract meta object
+      String packFileName = packFileIterator.next().getName();
+
+      //add entry to result map;
+      packMetas.put(loadPackFromDisk(packFileName).getMeta(), packFileName);
+    }
+    return packMetas;
   }
 
   /**
