@@ -1,4 +1,4 @@
-package com.github.m5c.livepoll.persistene;
+package com.github.m5c.livepoll.persistence;
 
 import com.github.m5c.livepoll.Pack;
 import com.github.m5c.livepoll.pollutils.Hyphenizer;
@@ -13,14 +13,21 @@ import org.springframework.stereotype.Component;
  * Helper component to save and load pack files from disk.
  */
 @Component
-public class PackIO {
+public class PackPersistence {
 
   private final String baseDir;
 
-  public PackIO(@Value("${base.dir}") String baseDir) {
+  public PackPersistence(@Value("${base.dir}") String baseDir) {
     this.baseDir = baseDir;
   }
 
+  /**
+   * Helper method to store a provided pack onject on disk. The object is serialized to json and
+   * stored in the configured application basedir (see application.porperties).
+   *
+   * @param pack as the pack object to save to disk.
+   * @throws IOException in case of a filesystem access error.
+   */
   public void persistPackToDisk(Pack pack) throws IOException {
 
     // Serialize pack
@@ -28,8 +35,8 @@ public class PackIO {
 
     // Create full path and filename (relative location in basedir, hyphenized name, json suffix)
     File samplePackFile = new File(
-        System.getProperty("user.home") + "/" + baseDir + "/packs/" + pack.getCreation() + "-"
-            + Hyphenizer.hyphenize(pack.getTitle()) + ".json");
+        System.getProperty("user.home") + "/" + baseDir + "/packs/" + pack.getMeta().getCreation()
+            + "-" + Hyphenizer.hyphenize(pack.getMeta().getTitle()) + ".json");
 
     // Save to disk
     FileUtils.writeStringToFile(samplePackFile, serializedPack);

@@ -1,20 +1,20 @@
 package com.github.m5c.livepoll.persistence;
 
 import com.github.m5c.livepoll.Pack;
+import com.github.m5c.livepoll.PackMeta;
 import com.github.m5c.livepoll.Poll;
-import com.github.m5c.livepoll.persistene.PackIO;
 import com.github.m5c.livepoll.pollutils.DateAndTopicIdGenerator;
 import java.io.IOException;
 import java.util.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PackIOTest {
+public class PackPersistenceTest {
 
   @Test
   public void persistAndLoadTestPack() throws IOException {
 
-    PackIO packIO = new PackIO(System.getProperty("java.io.tmpdir"));
+    PackPersistence packPersistence = new PackPersistence(System.getProperty("java.io.tmpdir"));
 
     // Create sample pack
     Poll poll1 =
@@ -25,18 +25,21 @@ public class PackIOTest {
     LinkedList<Poll> polls = new LinkedList<>();
     polls.add(poll1);
     polls.add(poll2);
-    Pack samplePack =
-        new Pack("Sample Pack", "Two sample questions to illustrate how packs work.", "Max", polls);
+    PackMeta samplePackMeta =
+        new PackMeta("Sample Pack", "Two sample questions to illustrate how packs work.", "Max");
+    Pack samplePack = new Pack(samplePackMeta, polls);
 
     // Test persist
-    packIO.persistPackToDisk(samplePack);
+    packPersistence.persistPackToDisk(samplePack);
 
     // Test load
     String date = DateAndTopicIdGenerator.getFormattedDate();
-    Pack loadedPack = packIO.loadPackFromDisk(date+"-sample-pack.json");
+    Pack loadedPack = packPersistence.loadPackFromDisk(date + "-sample-pack.json");
     System.out.println(loadedPack);
 
     // Verify content of deserialized pack
-    Assert.assertEquals("Amount of questions in deserialized Pack does not match the one of original.",2, loadedPack.getQuestions().size());
+    Assert.assertEquals(
+        "Amount of questions in deserialized Pack does not match the one of original.", 2,
+        loadedPack.getQuestions().size());
   }
 }

@@ -1,13 +1,8 @@
-package com.github.m5c.livepoll.persistene;
+package com.github.m5c.livepoll.persistence;
 
-import com.github.m5c.livepoll.Pack;
-import com.github.m5c.livepoll.Poll;
 import com.github.m5c.livepoll.pollutils.DateAndTopicIdGenerator;
-import com.github.m5c.livepoll.pollutils.Hyphenizer;
-import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 import javax.annotation.PostConstruct;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +21,20 @@ public class FileSystemInitializer {
 
   private final DateAndTopicIdGenerator idGenerator;
 
-  private final PackIO packIO;
+  private final PackPersistence packPersistence;
 
+  /**
+   * Component constructor.
+   *
+   * @param idGenerator     as a component that turns polls to their hyphenized unique ids.
+   * @param packPersistence as service object for save / load of packs to the filesystem.
+   * @param baseDir         as the applications base directory for config and IO operations.
+   */
   public FileSystemInitializer(@Autowired DateAndTopicIdGenerator idGenerator,
-                               @Autowired PackIO packIO, @Value("${base.dir}") String baseDir) {
+                               @Autowired PackPersistence packPersistence,
+                               @Value("${base.dir}") String baseDir) {
     this.idGenerator = idGenerator;
-    this.packIO = packIO;
+    this.packPersistence = packPersistence;
     this.baseDir = baseDir;
   }
 
@@ -39,13 +42,15 @@ public class FileSystemInitializer {
    * Actual logic resides in postconstruct, so we can access values injected from porperties file.
    * Postconstruct is autaomtically triggered after class creation through spring, for this class is
    * a component.
+   *
+   * @throws IOException in case the file system access fails for either verification or repair.
    */
   @PostConstruct
   public void ensureBaseDirIsReady() throws IOException {
 
     // Ensure the required file / directory structure is present.
-    String prefix=(baseDir.startsWith("/")?"":System.getProperty("user.home"));
-    File baseDirFile = new File( prefix+ "/" + baseDir);
+    String prefix = (baseDir.startsWith("/") ? "" : System.getProperty("user.home"));
+    File baseDirFile = new File(prefix + "/" + baseDir);
     File configfileFile = new File(baseDirFile.getPath() + "/config.properties");
     File packsDirFile = new File(baseDirFile.getPath() + "/packs");
 
@@ -54,6 +59,13 @@ public class FileSystemInitializer {
     ensureDirExists(packsDirFile);
   }
 
+  /**
+   * Helper method that verifies the file system and adjusts structure if the requested folder is
+   * not in place.
+   *
+   * @param dir as the folder object to check for on the file system as directory.
+   * @throws IOException in case filesystem access fails.
+   */
   private void ensureDirExists(File dir) throws IOException {
     // if dir exits but is a file, delete it
     if (dir.exists() && !FileUtils.isDirectory(dir)) {
@@ -65,6 +77,14 @@ public class FileSystemInitializer {
       FileUtils.forceMkdir(dir);
     }
   }
+
+  /**
+   * Helper method that verifies the file system and adjusts structure if the requested non-folder
+   * file is not in place.
+   *
+   * @param file as the file object to check for on the file system as directory.
+   * @throws IOException in case filesystem access fails.
+   */
 
   private void ensureFileExists(File file) throws IOException {
     // if file exits but is a dir, delete it

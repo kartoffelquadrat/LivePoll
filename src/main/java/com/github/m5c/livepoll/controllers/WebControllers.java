@@ -36,8 +36,8 @@ public class WebControllers {
   /**
    * Root menu endpoint. Only available to localhsot.
    *
-   * @param request
-   * @return
+   * @param request as the inbound http request.
+   * @return pointer to thymeleaf template used for page rendering.
    */
   @RequestMapping("/")
   public String forwardToMenu(HttpServletRequest request) {

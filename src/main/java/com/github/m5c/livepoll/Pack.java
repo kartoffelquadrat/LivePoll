@@ -13,43 +13,13 @@ import java.util.Collections;
  */
 public class Pack {
 
-  // Marks the moment of creation (definition of the questions, not object instantiation)
-  private final String creation;
-
-  // A crisp title to rapidly identify the pack, e.g. "Lecture 01, Object Orientation"
-  private final String title;
-
-  // A short decriptive abstract of the learning goals for this pack.
-  private final String pollAbstract;
-
-  // Series of questions to ask when replaying this pack.
+  private final PackMeta meta;
   private final Collection<Poll> questions;
 
-  // Author flag
-  private final String author;
 
-  public Pack(String title, String pollAbstract, String author, Collection<Poll> questions) {
-    this.creation = DateAndTopicIdGenerator.getFormattedDate();
-    this.title = title;
-    this.pollAbstract = pollAbstract;
-    this.author = author;
+  public Pack(PackMeta meta, Collection<Poll> questions) {
+    this.meta = meta;
     this.questions = questions;
-  }
-
-  public String getCreation() {
-    return creation;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getAuthor() {
-    return author;
-  }
-
-  public String getPollAbstract() {
-    return pollAbstract;
   }
 
   public Collection<Poll> getQuestions() {
@@ -59,19 +29,21 @@ public class Pack {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder("Pack Info:\n");
-    sb.append("Title: "+getTitle()+"\n");
-    sb.append("Created: "+getCreation()+"\n");
-    sb.append("Author: "+getAuthor()+"\n");
-    sb.append("Abstract: "+getPollAbstract()+"\n");
+    sb.append("Title: " + meta.getTitle() + "\n");
+    sb.append("Created: " + meta.getCreation() + "\n");
+    sb.append("Author: " + meta.getAuthor() + "\n");
+    sb.append("Abstract: " + meta.getPackAbstract() + "\n");
     sb.append("Questions: \n");
-    for(Poll poll: getQuestions())
-    {
-      sb.append("\t> "+poll.getTopic()+"\n");
-      for(String option: poll.getOptions())
-      {
-        sb.append("\t\t- "+option+"\n");
+    for (Poll poll : getQuestions()) {
+      sb.append("\t> " + poll.getTopic() + "\n");
+      for (String option : poll.getOptions()) {
+        sb.append("\t\t- " + option + "\n");
       }
     }
     return sb.toString();
+  }
+
+  public PackMeta getMeta() {
+    return meta;
   }
 }

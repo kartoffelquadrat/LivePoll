@@ -1,9 +1,9 @@
 package com.github.m5c.livepoll.controllers;
 
+import com.github.m5c.livepoll.PackMeta;
+import java.util.Collection;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.github.m5c.livepoll.Pack;
-import java.util.Collection;
 
 /**
  * REST Controller for all mene backend interactions.
@@ -13,8 +13,14 @@ import java.util.Collection;
 @RestController
 public class MenuController {
 
-  @GetMapping()
-  public Collection<Pack> getPreparedPacks() {
+  /**
+   * REST endpoint to retrieve list with metainformation for all packs. UI can display meta
+   * information and to allow user to select the desired pack.
+   *
+   * @return List of PackMeta details.
+   */
+  @GetMapping("/menu/packs") // TODO check if this is the right URL
+  public Collection<PackMeta> getPreparedPacks() {
 
     // TODO: look up packs on file system.
 
@@ -24,5 +30,6 @@ public class MenuController {
     return null;
   }
 
-  // TODO: endpoint to launch ONE loaded pack, i.e. use poll-manager to index each poll contained in pack.
+  // TODO: endpoint to launch ONE loaded pack, i.e. use poll-manager to index each poll
+  //  contained in pack.
 }

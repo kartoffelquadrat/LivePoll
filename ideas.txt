@@ -1,3 +1,5 @@
+Set up CI pipeline, automated checks + shield
+
 Menu bar, or at least home button, that figures on all slides.
 
 For quick poll, set right answer to undefined, to not create solution field. (as i explain on the fly. or at least allow for leaving empty)

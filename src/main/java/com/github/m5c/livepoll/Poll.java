@@ -16,8 +16,8 @@ public class Poll {
   // The question to ask
   private final String topic;
 
-  // The optionVotes map serves at once as list of descriptive strings, and count for submitted votes.
-  // The count is initialized to zero ar object creation
+  // The optionVotes map serves at once as list of descriptive strings, and count for submitted
+  // votes. The count is initialized to zero ar object creation
   private final Map<String, Integer> optionVotes;
 
   // Marks the index of the correct option

@@ -1,7 +1,5 @@
 package com.github.m5c.livepoll.persistence;
 
-import com.github.m5c.livepoll.persistene.FileSystemInitializer;
-import com.github.m5c.livepoll.persistene.PackIO;
 import com.github.m5c.livepoll.pollutils.DateAndTopicIdGenerator;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +19,7 @@ public class FileSystemInitializerTest {
 
     // Let initlialiser create required strucutre in test tmp dir]
     FileSystemInitializer initializer =
-        new FileSystemInitializer(new DateAndTopicIdGenerator(), new PackIO(testBaseDir), testBaseDir);
+        new FileSystemInitializer(new DateAndTopicIdGenerator(), new PackPersistence(testBaseDir), testBaseDir);
     initializer.ensureBaseDirIsReady();
 
     // Verify the created structure is sane

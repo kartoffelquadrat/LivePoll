@@ -1,4 +1,5 @@
 com.github.m5c.livepoll
 com.github.m5c.livepoll.controllers
+com.github.m5c.livepoll.persistence
 com.github.m5c.livepoll.pollutils
 com.github.m5c.livepoll.qrgenerator

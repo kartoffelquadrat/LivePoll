@@ -28,6 +28,6 @@ public class DateAndTopicIdGenerator implements IdGenerator {
   }
 
   public static String getFormattedDate() {
-     return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
   }
 }
