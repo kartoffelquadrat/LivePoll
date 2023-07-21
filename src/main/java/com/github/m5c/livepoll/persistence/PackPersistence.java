@@ -30,9 +30,10 @@ public class PackPersistence {
    * stored in the configured application basedir (see application.porperties).
    *
    * @param pack as the pack object to save to disk.
+   * @return String containing absolute path to persisted file on disk.
    * @throws IOException in case of a filesystem access error.
    */
-  public void persistPackToDisk(Pack pack) throws IOException {
+  public String persistPackToDisk(Pack pack) throws IOException {
 
     // Serialize pack
     String serializedPack = new Gson().toJson(pack);
@@ -44,6 +45,7 @@ public class PackPersistence {
 
     // Save to disk
     FileUtils.writeStringToFile(samplePackFile, serializedPack);
+    return samplePackFile.getAbsolutePath();
   }
 
   /**
@@ -90,5 +92,29 @@ public class PackPersistence {
 
     // Convert back to object and return
     return new Gson().fromJson(packAsJson, Pack.class);
+  }
+
+  /**
+   * Deletes a previously persisted pack object. Includes basic verification to ensure the
+   * referenced file actually is a pack.
+   *
+   * @param testPackDiskLocation as absolute path string referencing file to delete.
+   */
+  public void deletePack(String testPackDiskLocation) throws PackPersistenceException {
+
+    // Verify the referenced file is a pack
+    // Suffix must be json
+    if (!testPackDiskLocation.endsWith("json")) {
+      throw new PackPersistenceException("Provided file is not a pack file.");
+    }
+    // parent folder must be "packs"
+    File packFile = new File(testPackDiskLocation);
+    if (!packFile.exists()) {
+      throw new PackPersistenceException("Pack file cannot be deleted, because it does not exist.");
+    }
+    if (!packFile.getParent().endsWith("packs")) {
+      throw new PackPersistenceException("Provided file is not in valid pack location: "+packFile.getAbsolutePath());
+    }
+    packFile.delete();
   }
 }
