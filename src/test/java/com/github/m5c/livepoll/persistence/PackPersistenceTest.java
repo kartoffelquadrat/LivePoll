@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class PackPersistenceTest {
 
-  private static String sampleTestBaseDir = System.getProperty("java.io.tmpdir")+".livepoll";
+  private static String sampleTestBaseDir = System.getProperty("java.io.tmpdir") + ".livepoll";
 
   /**
    * Persists a provided test pack on disk.
@@ -73,9 +73,12 @@ public class PackPersistenceTest {
     String testPackDiskLocation = persistTestPack(packPersistence);
 
     // Test loading of all metas
-    Map allMetas = packPersistence.loadAllPackMetas();
-    Assert.assertEquals("Amount of laoded metas is not correct, expected exactly one meta.",
+    Map<PackMeta, String> allMetas = packPersistence.loadAllPackMetas();
+    Assert.assertEquals("Amount of loaded metas is not correct, expected exactly one meta.",
         allMetas.entrySet().size(), 1);
+    Assert.assertEquals("Meta information of test pack is incorrect. Author should be \"Max\"",
+        allMetas.keySet().iterator().next().getAuthor(), "Max");
+
 
     // Remove test pack to keep test directoy clean for subsequent test
     packPersistence.deletePack(testPackDiskLocation);
