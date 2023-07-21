@@ -22,7 +22,15 @@ public class PackPersistence {
   private final String baseDir;
 
   public PackPersistence(@Value("${base.dir}") String baseDir) {
-    this.baseDir = baseDir;
+
+    // If baseDir variable in properties file has no leading "/" we assume it is a location
+    // realtive to the homedir.
+    if (baseDir.startsWith("/")) {
+      this.baseDir = baseDir;
+    } else {
+      this.baseDir = System.getProperty("user.home") + "/" + baseDir;
+    }
+
   }
 
   /**
@@ -40,8 +48,8 @@ public class PackPersistence {
 
     // Create full path and filename (relative location in basedir, hyphenized name, json suffix)
     File samplePackFile = new File(
-        System.getProperty("user.home") + "/" + baseDir + "/packs/" + pack.getMeta().getCreation()
-            + "-" + Hyphenizer.hyphenize(pack.getMeta().getTitle()) + ".json");
+        baseDir + "/packs/" + pack.getMeta().getCreation() + "-" + Hyphenizer.hyphenize(
+            pack.getMeta().getTitle()) + ".json");
 
     // Save to disk
     FileUtils.writeStringToFile(samplePackFile, serializedPack);
@@ -84,8 +92,7 @@ public class PackPersistence {
    */
   public Pack loadPackFromDisk(String fileName) throws IOException {
     // Resolve full file path
-    File targetPackFile =
-        new File(System.getProperty("user.home") + "/" + baseDir + "/packs/" + fileName);
+    File targetPackFile = new File(baseDir + "/packs/" + fileName);
 
     // Load json string
     String packAsJson = FileUtils.readFileToString(targetPackFile);
@@ -113,7 +120,8 @@ public class PackPersistence {
       throw new PackPersistenceException("Pack file cannot be deleted, because it does not exist.");
     }
     if (!packFile.getParent().endsWith("packs")) {
-      throw new PackPersistenceException("Provided file is not in valid pack location: "+packFile.getAbsolutePath());
+      throw new PackPersistenceException(
+          "Provided file is not in valid pack location: " + packFile.getAbsolutePath());
     }
     packFile.delete();
   }

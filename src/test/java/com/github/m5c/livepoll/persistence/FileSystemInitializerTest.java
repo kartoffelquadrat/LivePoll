@@ -9,22 +9,29 @@ import org.junit.Test;
 
 public class FileSystemInitializerTest {
 
+
+  public static void runFileSystemInitializer(String testBaseDir) throws IOException {
+
+    // Run initializer, to ensure needed file system strucutre is present
+    FileSystemInitializer initializer =
+        new FileSystemInitializer(new DateAndTopicIdGenerator(), new PackPersistence(testBaseDir),
+            testBaseDir);
+    initializer.ensureBaseDirIsReady();
+  }
+
   @Test
   public void testStructureCreationInRam() throws IOException {
 
     // Set up mock basedir location
-    String testBaseDir = System.getProperty("java.io.tmpdir").toString()+"/.dummybasedir";
+    String testBaseDir = System.getProperty("java.io.tmpdir").toString() + "/.dummybasedir";
     File testBaseDirFile = new File(testBaseDir);
-    System.out.println(testBaseDirFile);
 
-    // Let initlialiser create required strucutre in test tmp dir]
-    FileSystemInitializer initializer =
-        new FileSystemInitializer(new DateAndTopicIdGenerator(), new PackPersistence(testBaseDir), testBaseDir);
-    initializer.ensureBaseDirIsReady();
+    runFileSystemInitializer(testBaseDir);
 
     // Verify the created structure is sane
     Assert.assertTrue("Initilizer did not create required basedir.", testBaseDirFile.exists());
-    Assert.assertTrue("Basedir created by initilizer is not a directory.", FileUtils.isDirectory(testBaseDirFile));
+    Assert.assertTrue("Basedir created by initilizer is not a directory.",
+        FileUtils.isDirectory(testBaseDirFile));
 
     // Erase the created test structure, so this does not interfere woth other / later tests.
     FileUtils.deleteDirectory(testBaseDirFile);

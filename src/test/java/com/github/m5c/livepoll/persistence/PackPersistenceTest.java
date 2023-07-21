@@ -6,10 +6,13 @@ import com.github.m5c.livepoll.Poll;
 import com.github.m5c.livepoll.pollutils.DateAndTopicIdGenerator;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class PackPersistenceTest {
+
+  private static String sampleTestBaseDir = System.getProperty("java.io.tmpdir")+".livepoll";
 
   /**
    * Persists a provided test pack on disk.
@@ -40,7 +43,8 @@ public class PackPersistenceTest {
   @Test
   public void persistAndLoadTestPack() throws IOException, PackPersistenceException {
 
-    PackPersistence packPersistence = new PackPersistence(System.getProperty("java.io.tmpdir"));
+    PackPersistence packPersistence = new PackPersistence(sampleTestBaseDir);
+    FileSystemInitializerTest.runFileSystemInitializer(sampleTestBaseDir);
 
     // Create test pack on disk (test dir)
     String testPackDiskLocation = persistTestPack(packPersistence);
@@ -59,5 +63,21 @@ public class PackPersistenceTest {
     packPersistence.deletePack(testPackDiskLocation);
   }
 
-  // TODO: CREATE NEW TEST FOR LAODING MAP WITH ALL METAS
+  @Test
+  public void lookUpAllPackMetas() throws IOException, PackPersistenceException {
+
+    PackPersistence packPersistence = new PackPersistence(sampleTestBaseDir);
+    FileSystemInitializerTest.runFileSystemInitializer(sampleTestBaseDir);
+
+    // Create test pack on disk (test dir)
+    String testPackDiskLocation = persistTestPack(packPersistence);
+
+    // Test loading of all metas
+    Map allMetas = packPersistence.loadAllPackMetas();
+    Assert.assertEquals("Amount of laoded metas is not correct, expected exactly one meta.",
+        allMetas.entrySet().size(), 1);
+
+    // Remove test pack to keep test directoy clean for subsequent test
+    packPersistence.deletePack(testPackDiskLocation);
+  }
 }
