@@ -25,29 +25,9 @@ public class Poll {
 
   private final String explanation;
 
-
   /**
    * Constructor. Sets up topic and options/vote-amount map. This constructor sets solution index
-   * and explanation to default/empty values.
-   *
-   * @param topic   as the final topic for this poll.
-   * @param options as the string options for all possible answers.
-   */
-  public Poll(String topic, String[] options) {
-
-    // Store topic and initialize registered votes for all options to 0.
-    this.topic = topic;
-    this.optionVotes = new LinkedHashMap<>();
-    for (String option : options) {
-      this.optionVotes.put(option, 0);
-    }
-    // Default to negative value, to indivate there is no marked correct solution.
-    solutionIndex = -1;
-    explanation = "";
-  }
-
-  /**
-   * Overloaded contructor that also allows setting of solution and explanation.
+   * and explanation to default/empty values. Also allows setting of solution and explanation.
    *
    * @param topic         as the final topic for this poll.
    * @param options       as the string options for all possible answers.
