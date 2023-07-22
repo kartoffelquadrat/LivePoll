@@ -6,9 +6,9 @@ import com.github.m5c.livepoll.pollutils.Hyphenizer;
 import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Iterator;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,13 @@ public class PackPersistence {
 
   private final String baseDir;
 
+  /**
+   * Constructor for the PackPersitence component. A folder named "packs" must be within th provided
+   * location, for persistence to work. Note that values starting without slash are considered
+   * locations relative to the user's home sirectory.
+   *
+   * @param baseDir as the directory to use as base path for configurations and persistence.
+   */
   public PackPersistence(@Value("${base.dir}") String baseDir) {
 
     // If baseDir variable in properties file has no leading "/" we assume it is a location
@@ -61,6 +68,7 @@ public class PackPersistence {
    * map translates from PackMeta object to the filename of the associated pack.
    *
    * @return Map of all PackMetas to the correpsonding Pack's filename on disk.
+   * @throws IOException in case of a files system access error on load.
    */
   public Map<PackMeta, String> loadAllPackMetas() throws IOException {
 
@@ -106,6 +114,7 @@ public class PackPersistence {
    * referenced file actually is a pack.
    *
    * @param testPackDiskLocation as absolute path string referencing file to delete.
+   * @throws PackPersistenceException in case the pack requested for deletion cannot be found.
    */
   public void deletePack(String testPackDiskLocation) throws PackPersistenceException {
 
