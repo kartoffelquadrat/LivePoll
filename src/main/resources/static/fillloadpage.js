@@ -8,7 +8,11 @@ function updatePackList() {
 
 function modifyPackMetaDom(packmetamap) {
 
+    // compute how many lines (with up to two entries) are needed
+    let packKeys = Object.keys(packmetamap)
+    let packLines = Math.ceil(packKeys.length / 2.0) // rounded up division by 2
+
     // let metapacks = JSON.parse(packmetas)
-    console.log( { packmetamap })
-    console.log("All good.")
+    console.log("Packs found: "+ packKeys)
+    console.log("Lines needed: "+packLines)
 }

@@ -6,3 +6,5 @@ For quick poll, set right answer to undefined, to not create solution field. (as
 
 Every poll currently has its own URL.
 Would make sense to consider packs as a series of URLs? / are initiated once and every poll redirects to next on end?
+
+Load poll pack menuy, should probably only be "packs" menu. Each item should have Load / Export button. There should be an option to add new in the same menu
