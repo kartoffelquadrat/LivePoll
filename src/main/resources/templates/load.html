@@ -9,15 +9,8 @@
 </head>
 <body onload="updatePackList()">
 <h1>Load Poll Pack</h1>
-<div class="grid-container">
-    <div class="menu-option" onclick="window.location.href = 'quick'">
-        <h2>Object Orientation I</h2>
-        <br/>
-        Warmup questions centered around the base principles of object orientation in modern
-        programming languages.</a>
-        <br/><br/>
-        <div style="text-align: right">8 Polls / Max / 27-04-2023</div>
-    </div>
+<div id="pack-container" class="grid-container">
+    <!-- Content of grid is filled by JS, modifying DOM tree based on API result.-->
 </div>
 </body>
 </html>
