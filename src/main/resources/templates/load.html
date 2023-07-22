@@ -1,15 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>LOAD</title>
-
-  THIS IS A STUB. In essence here is a file drop menu / browse menu / selection of prepared files found on disk.
-  When one pack is selected, JS fires a fetch for every instance, then creates a list with all URLs, and forward to first poll.
-  Every poll aver completion removes first item in list, then forwards to next poll.
-  When list is empty: stats / back to menu.
+    <title>Poll</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- Overload the css href with a thymeleaf tag to support spring loading and IDEA preview.-->
+    <link rel="stylesheet" th:href="@{styles.css}" href="../static/styles.css">
+    <script th:src="@{fillloadpage.js}" src="../static/fillloadpage.js"></script>
 </head>
-<body>
-
+<body onload="updatePackList()">
+<br/>
+<h1>Load Poll Pack</h1>
+<div style='text-align:center;'>
+    <div class="menuoption" onclick="window.location.href = 'quick'"><h2>
+        Instant Poll</h2><br/>Manually create a one-shot poll.</a></div>
+    <div class="menuoption" onclick="window.location.href = 'load'"><h2>
+        Load Poll</h2><br/>Load a prepared
+        poll series.</a></div>
+</div>
+<div class="menurow">
+    <div class="menuoption" onclick="window.location.href = 'quick'"><h2>
+        Instant Poll</h2><br/>Manually create a one-shot poll.</a></div>
+    <div class="menuoption hiddenoption" onclick="window.location.href = 'load'"><h2>
+        Load Poll</h2><br/>Load a prepared
+        poll series.</a></div>
+</div>
 </body>
 </html>

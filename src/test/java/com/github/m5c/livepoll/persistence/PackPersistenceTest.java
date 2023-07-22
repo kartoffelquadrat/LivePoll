@@ -73,12 +73,11 @@ public class PackPersistenceTest {
     String testPackDiskLocation = persistTestPack(packPersistence);
 
     // Test loading of all metas
-    Map<PackMeta, String> allMetas = packPersistence.loadAllPackMetas();
+    Map<String, PackMeta> allMetas = packPersistence.loadAllPackMetas();
     Assert.assertEquals("Amount of loaded metas is not correct, expected exactly one meta.",
-        allMetas.entrySet().size(), 1);
+        allMetas.keySet().size(), 1);
     Assert.assertEquals("Meta information of test pack is incorrect. Author should be \"Max\"",
-        allMetas.keySet().iterator().next().getAuthor(), "Max");
-
+        allMetas.values().iterator().next().getAuthor(), "Max");
 
     // Remove test pack to keep test directoy clean for subsequent test
     packPersistence.deletePack(testPackDiskLocation);

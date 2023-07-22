@@ -35,6 +35,11 @@ h4 {
     margin-bottom: .5cm;
 }
 
+.menurow {
+    text-align:center;
+    padding-top: .3rem;
+}
+
 .menuoption {
     display: inline-block;
     border-radius: 2rem;
@@ -49,4 +54,8 @@ h4 {
 .menuoption:hover {
     background-color: #88abd2;
     /*color: white;*/
+}
+
+.hiddenoption {
+    visibility:hidden;
 }

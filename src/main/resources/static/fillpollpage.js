@@ -3,12 +3,10 @@
  */
 function addKeyListeners() {
     document.addEventListener('keyup', (e) => {
-        if (e.code === "ArrowLeft")
-            window.location.href = "/";
+        if (e.code === "ArrowLeft") window.location.href = "/";
     });
     document.addEventListener('keyup', (e) => {
-        if (e.code === "Space")
-            revealNumbers();
+        if (e.code === "Space") revealNumbers();
     });
 }
 
@@ -69,17 +67,18 @@ function updateOutcome() {
     refreshVote(pollid, lastoption, "counter3");
 
     // only refresh neutral if exists
-    if (maybeoption)
-        refreshVote(pollid, maybeoption, "counter2");
+    if (maybeoption) refreshVote(pollid, maybeoption, "counter2");
 }
 
+/**
+ * Retrieves amount of votes for a given option from backend.
+ * @param pollid as the identifier of the poll.
+ * @param option as the option to get the stats for.
+ * @param targetelement as the DOM element to modify by retrieved number.
+ */
 function refreshVote(pollid, option, targetelement) {
 
     fetch('/polls/' + pollid + '/outcome/' + option).then(result => result.text()).then(text => {
-            if (text >= 0)
-                document.getElementById(targetelement).textContent = text;
-            else
-                window.location.href = "/";
-        }
-    );
+        if (text >= 0) document.getElementById(targetelement).textContent = text; else window.location.href = "/";
+    });
 }

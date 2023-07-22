@@ -67,13 +67,13 @@ public class PackPersistence {
    * Searches the configured basedir for persisted packs and creates an indexed map for each. The
    * map translates from PackMeta object to the filename of the associated pack.
    *
-   * @return Map of all PackMetas to the correpsonding Pack's filename on disk.
+   * @return Map of all PackMetas filenames to the correpsonding Pack meta object.
    * @throws IOException in case of a files system access error on load.
    */
-  public Map<PackMeta, String> loadAllPackMetas() throws IOException {
+  public Map<String, PackMeta> loadAllPackMetas() throws IOException {
 
     // Preapre result map. Will be filled further down in this method.
-    Map<PackMeta, String> packMetas = new LinkedHashMap<>();
+    Map<String, PackMeta> packMetas = new LinkedHashMap<>();
 
     // Create file for dir on disk with all packs
     File packDir = new File(baseDir + "/packs");
@@ -85,7 +85,7 @@ public class PackPersistence {
       String packFileName = packFileIterator.next().getName();
 
       //add entry to result map;
-      packMetas.put(loadPackFromDisk(packFileName).getMeta(), packFileName);
+      packMetas.put(packFileName, loadPackFromDisk(packFileName).getMeta());
     }
     return packMetas;
   }

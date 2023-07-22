@@ -1,7 +1,10 @@
 package com.github.m5c.livepoll.controllers;
 
 import com.github.m5c.livepoll.PackMeta;
-import java.util.Collection;
+import com.github.m5c.livepoll.persistence.PackPersistence;
+import java.io.IOException;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,23 +16,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MenuController {
 
+  private PackPersistence packPersistence;
+
+  /**
+   * Public constructor to inject dependencies. We use constructor injection to allow for simple
+   * testing outside Springs bean container.
+   *
+   * @param packPersistence as service component that enables fast pack IO operations.
+   */
+  public MenuController(@Autowired PackPersistence packPersistence) {
+    this.packPersistence = packPersistence;
+  }
+
   /**
    * REST endpoint to retrieve list with metainformation for all packs. UI can display meta
    * information and to allow user to select the desired pack.
    *
-   * @return List of PackMeta details.
+   * @return Map of all loaded PackMetas to their filename (without leading path information).
+   * @throws IOException in case pack information can not be loaded from disk.
    */
-  @GetMapping("/menu/packs") // TODO check if this is the right URL
-  public Collection<PackMeta> getPreparedPacks() {
+  @GetMapping("/menu/packs")
+  public Map<String, PackMeta> getPreparedPacks() throws IOException {
 
-    // TODO: look up packs on file system.
-
-    // TODO: load all packs and store in collection (each pack is a file)
-
-    // TODO: create super collection and return map of packs (title - object)
-    return null;
+    return packPersistence.loadAllPackMetas();
   }
-
-  // TODO: endpoint to launch ONE loaded pack, i.e. use poll-manager to index each poll
-  //  contained in pack.
 }
