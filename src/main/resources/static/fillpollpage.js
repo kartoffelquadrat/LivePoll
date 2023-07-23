@@ -14,7 +14,7 @@ function removeNeutralOptionIfEmpty() {
 
     // look up text of netrual option. Is empty if not needed.
     let maybeoption = document.getElementById("maybeoption");
-    maybeoptiontext = maybeoption.innerText;
+    let maybeoptiontext = maybeoption.innerText;
     console.log("Analyzing maybeoption: " + maybeoption);
 
     // Remove entire div if empty, boost first and last option.
