@@ -21,7 +21,7 @@ public class Poll {
   private final Map<String, Integer> optionVotes;
 
   // Marks the index of the correct option
-  private final int solutionIndex;
+  private final int[] solutionsIndexes;
 
   private final String explanation;
 
@@ -29,12 +29,12 @@ public class Poll {
    * Constructor. Sets up topic and options/vote-amount map. This constructor sets solution index
    * and explanation to default/empty values. Also allows setting of solution and explanation.
    *
-   * @param topic         as the final topic for this poll.
-   * @param options       as the string options for all possible answers.
-   * @param solutionIndex as the number of the correct answer.
-   * @param explanation   as additional text to jsutify the right answer.
+   * @param topic            as the final topic for this poll.
+   * @param options          as the string options for all possible answers.
+   * @param solutionsIndexes as the numbers of correct answers.
+   * @param explanation      as additional text to jsutify the right answer.
    */
-  public Poll(String topic, String[] options, int solutionIndex, String explanation) {
+  public Poll(String topic, String[] options, int[] solutionsIndexes, String explanation) {
 
     // Store topic and initialize registered votes for all options to 0.
     this.topic = topic;
@@ -42,7 +42,7 @@ public class Poll {
     for (String option : options) {
       this.optionVotes.put(option, 0);
     }
-    this.solutionIndex = solutionIndex;
+    this.solutionsIndexes = solutionsIndexes;
     this.explanation = explanation;
   }
 
@@ -111,8 +111,8 @@ public class Poll {
    *
    * @return int as index.
    */
-  public int getSolutionIndex() {
-    return solutionIndex;
+  public int[] getSolutionIndex() {
+    return solutionsIndexes;
   }
 
   /**

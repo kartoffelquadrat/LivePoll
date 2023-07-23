@@ -2,8 +2,9 @@
 <head>
     <title>Poll</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="../styles.css">
-    <script src="../fillpollpage.js"></script>
+    <!-- Overload the css href with a thymeleaf tag to support spring loading and IDEA preview.-->
+    <link rel="stylesheet" th:href="@{styles.css}" href="../static/styles.css">
+    <script th:src="@{fillpollpage.js}" src="../static/fillpollpage.js"></script>
 </head>
 <body onload="removeNeutralOptionIfEmpty(), autoreload(), updateOutcome(), autoreload(), addKeyListeners()">
 <h1 th:text="${topic}"></h1>

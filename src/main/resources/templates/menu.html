@@ -3,7 +3,8 @@
 <head>
     <title>Poll</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="../styles.css">
+    <!-- Overload the css href with a thymeleaf tag to support spring loading and IDEA preview.-->
+    <link rel="stylesheet" th:href="@{styles.css}" href="../static/styles.css">
 </head>
 <body onload="assignMenuHandlers()">
 <br/>

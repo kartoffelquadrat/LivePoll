@@ -60,10 +60,19 @@ public class PollManager {
   /**
    * Looks up if the given poll is known to the manager.
    *
-   * @param pollid as the poll keyname to look up.
+   * @param pollId as the poll keyname to look up.
    * @return true if the poll exists, false if not.
    */
-  public boolean isExistentPoll(String pollid) {
-    return indexedPolls.containsKey(pollid);
+  public boolean isExistentPoll(String pollId) {
+    return indexedPolls.containsKey(pollId);
+  }
+
+  /**
+   * Removes an existing poll from the backend. Voting is no longer possible.
+   *
+   * @param pollId as the string identifier of the poll to remove.
+   */
+  public void removePoll(String pollId) {
+    indexedPolls.remove(pollId);
   }
 }

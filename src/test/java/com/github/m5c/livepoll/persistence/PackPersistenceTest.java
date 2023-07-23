@@ -24,11 +24,10 @@ public class PackPersistenceTest {
   private String persistTestPack(PackPersistence packPersistence) throws IOException {
 
     // Create sample pack
-    Poll poll1 =
-        new Poll("Are cats cooler than dogs?", new String[] {"Yes", "YES!", "Absolutely"}, 1,
-            "The correct answer is \"YES!\", becuase cats are way cooler than dogs.");
-    Poll poll2 = new Poll("The earth is...", new String[] {"flat", "blue", "made out of cheese"}, 1,
-        "The correct answer is \"blue\", as we know from the blue marble image.");
+    Poll poll1 = new Poll("Are cats cooler than dogs?", new String[] {"Yes", "YES!", "Absolutely"},
+        new int[] {1}, "The correct answer is \"YES!\", becuase cats are way cooler than dogs.");
+    Poll poll2 = new Poll("The earth is...", new String[] {"flat", "blue", "made out of cheese"},
+        new int[] {1}, "The correct answer is \"blue\", as we know from the blue marble image.");
     LinkedList<Poll> polls = new LinkedList<>();
     polls.add(poll1);
     polls.add(poll2);

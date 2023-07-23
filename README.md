@@ -47,7 +47,12 @@ source code and instrutions for a *LivePoll*, a lightweight technical polling ap
      - /polls/{pollid}/qr/{option} => Cast vote and retrieve ACK message. In a true REST service 
      this would be a Put/Post option, but for simplicity we use the phones implicitly website GET to cast a vote.
   REST (these are actual API backends, not returning website data but intended for JSON exchange)
-     - 
+     - GET /menu/packs => HashMap<PackFile, PackMeta>
+     - GET /polls/{pollid}/options/{option}   SUBMIT of a vote (breach of REST pattern, but this is a design choice)
+     - GET /polls/{pollid}/outcome/{option}   submission stats
+     - POST /polls                            add new poll (only used by quickpoll)
+     - DEL  /polls/{pollid}                   close existing poll
+      
 ```
 
 > Note: The API is not a true REST API, as we are using GET requests for voting. This is a design

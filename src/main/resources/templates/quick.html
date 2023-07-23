@@ -1,30 +1,33 @@
 <html>
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <script src="submitpoll.js"></script>
+    <!-- Overload the css href with a thymeleaf tag to support spring loading and IDEA preview.-->
+    <link rel="stylesheet" th:href="@{styles.css}" href="../static/styles.css">
+    <script th:src="@{submitpoll.js}" src="../static/submitpoll.js"></script>
 </head>
+<!--Note: Quickpolls are the special case of packs with exatly one poll entry.-->
 <body onload="registerPollSubmitButton()" onpageshow="enableButtons()">
 <h1>Create new poll</h1>
 <label for="topic">Poll question:</label><br/>
 <input type="text" id="topic" name="topic">
 <br/>
 <br/>
-<label for="neutralallowed">Neutral votes </label>
+<label for="neutralallowed">Third option </label>
 <input type="checkbox" id="neutralallowed" name="neutralallowed" value="Neutral Option">
 <br/><br/>
 
-<label for="option1">Positive label:</label><br/>
+<label for="option1">Options / Correct answer(s):</label><br/>
 <input type="text" id="option1" name="option1" value="Yes">
-<br/>
+<input type="checkbox" id="option1check"><br/>
 <div id="optionaloption" style="display: none;">
-    <label for="option2">Neutral label:</label><br/>
     <input type="text" id="option2" name="option2" value="Unsure">
-    <br/>
+    <input type="checkbox" id="option2check"><br/>
 </div>
-<label for="option3">Negative label:</label><br/>
-<input type="text" id="option3" name="option3" value="No"><br/>
-
+<input type="text" id="option3" name="option3" value="No">
+<input type="checkbox" id="option3check"><br/>
 <br/>
+<label for="explanation">Explanation:</label><br/>
+<input type="text" id="explanation" name="explanation" value="">
+<br/></br>
 <input type="submit" id="submitbutton" value="Create Poll!">
 
 </body>

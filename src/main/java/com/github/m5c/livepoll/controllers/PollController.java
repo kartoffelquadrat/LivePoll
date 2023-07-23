@@ -12,6 +12,7 @@ import com.google.zxing.common.BitMatrix;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,8 +48,7 @@ public class PollController {
    */
   @Autowired
   public PollController(QrImageGenerator qrImageGenerator,
-                        LocalResourceEncoder localResourceEncoder,
-                        LocalIpResolver localIpResolver,
+                        LocalResourceEncoder localResourceEncoder, LocalIpResolver localIpResolver,
                         PollManager pollManager) {
     this.qrImageGenerator = qrImageGenerator;
     this.localResourceEncoder = localResourceEncoder;
@@ -129,6 +129,25 @@ public class PollController {
   }
 
   /**
+   * Rest endpoint to close a repviously opened poll.
+   *
+   * @param pollId  as the identifier of the poll.
+   * @param request as the http request needed to dermine the request origin.
+   */
+  @DeleteMapping(value = "/polls/{pollid}")
+  public void createPoll(@PathVariable("pollid") String pollId, HttpServletRequest request) {
+
+    // reject if this request comes from a foreign machine.
+    if (!request.getRemoteAddr().equals("127.0.0.1")) {
+      return;
+    }
+
+    // Create new poll based on information in request payload.
+    pollManager.removePoll(pollId);
+  }
+
+
+  /**
    * Private helper method to generate the qrcodes for a poll option and store the qr files on
    * disk.
    *
@@ -137,8 +156,7 @@ public class PollController {
    * @throws IOException     lookup of qr target IP fails
    * @throws WriterException if writing of qrcode to disk fails
    */
-  private void createPollQrCodes(String pollId, Poll poll)
-      throws IOException, WriterException {
+  private void createPollQrCodes(String pollId, Poll poll) throws IOException, WriterException {
 
     // Create QR code for every option mentioned in poll
     for (String option : poll.getOptions()) {
