@@ -1,6 +1,6 @@
 # LivePoll
 
-[Javadoc link](https://kartoffelquadrat.github.io/LivePoll/)
+[Javadoc link](https://m5c.github.io/LivePoll/)
 
 ## Usage
 
