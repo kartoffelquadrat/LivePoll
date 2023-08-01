@@ -71,5 +71,6 @@ h4 {
 
 .menu-option:hover {
     background-color: #88abd2;
+    transform: scale(1.04);
     /*color: white;*/
 }

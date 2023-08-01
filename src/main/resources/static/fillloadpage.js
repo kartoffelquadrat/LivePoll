@@ -1,11 +1,18 @@
 // JavaScript to modify the DOM based on the poll packs persisted on disk at backend.
 
+/**
+ * Obtains list of packs from backend and initiates listing them all in DOM.
+ */
 function updatePackList() {
     fetch('/menu/packs')
         .then(result => result.json())
         .then(packmetas => modifyPackMetaDom(packmetas))
 }
 
+/**
+ * Modifies DOM to contain one card per loaded pack, as indexed in json map.
+ * @param packMetaMap
+ */
 function modifyPackMetaDom(packMetaMap) {
 
     // compute how many lines (with up to two entries) are needed
@@ -23,6 +30,19 @@ function modifyPackMetaDom(packMetaMap) {
     }
 }
 
+/**
+ * Initiates call to backend to create REST endpoints for all polls associated to the given pack.
+ */
+function instantiatePack(packId) {
+    alert("Instantiating pack: "+packId)
+}
+
+/**
+ * Helper function to create HTML code that corresponds to one pack card representation, and
+ * associated JS handler function.
+ * @param packFileName
+ * @param packMeta
+ */
 function createPackCard(packFileName, packMeta) {
 
     console.log("Key: " + packFileName + ", Value: " + packMeta)
@@ -34,10 +54,11 @@ function createPackCard(packFileName, packMeta) {
     // Use pack metadata to fill html template (of card)
     // See: https://stackoverflow.com/a/42758963
     let div = document.createElement('div');
-     // TODO: adjust onclick: it must trigger creation of all questions and redirect to first poll of pack
+    // TODO: adjust onclick: it must trigger creation of all questions and redirect to first poll
+    // of pack
     div.setAttribute("class", "menu-option")
     div.innerHTML = `
-        <div onclick="window.location.href = 'quick'">
+        <div onclick="instantiatePack(\``+packFileName+`\`)">
             <h2>${title}</h2>
             <br/>
             ${abstract}
