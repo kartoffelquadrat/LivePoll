@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Represents all static and dynmically collected data of a poll. Note that one poll can be cast
+ * Represents all static and dynamically collected data of a poll. Note that one poll can be cast
  * multiple times and therefore the URL associated to a poll is not stored inside the poll object.
  *
  * @author Maximilian Schiedermeier

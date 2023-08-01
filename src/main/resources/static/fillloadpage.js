@@ -35,6 +35,10 @@ function modifyPackMetaDom(packMetaMap) {
  */
 function instantiatePack(packId) {
     alert("Instantiating pack: "+packId)
+
+    fetch('/menu/packs/'+packId, {method: "PUT"})
+        .then(result => result.json())
+        .then(pollUrls => alert(pollUrls))
 }
 
 /**

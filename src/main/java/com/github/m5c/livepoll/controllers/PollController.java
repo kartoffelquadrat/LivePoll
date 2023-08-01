@@ -123,9 +123,7 @@ public class PollController {
     }
 
     // Create new poll based on information in request payload.
-    String pollId = pollManager.addPoll(poll);
-    createPollQrCodes(pollId, poll);
-    return pollId;
+    return registerPoll(poll);
   }
 
   /**
@@ -146,6 +144,20 @@ public class PollController {
     pollManager.removePoll(pollId);
   }
 
+  /**
+   * Registers a poll object with the poll manager. By doing so the backend knows about the
+   * existence of the poll, and the required QRcodes for voting are created.
+   *
+   * @param poll as the poll object defining question, options, etc.
+   * @return pollId as the unique ID associated to the registered poll object.
+   * @throws IOException     lookup of qr target IP fails
+   * @throws WriterException if writing of qrcode to disk fails
+   */
+  protected String registerPoll(Poll poll) throws IOException, WriterException {
+    String pollId = pollManager.addPoll(poll);
+    createPollQrCodes(pollId, poll);
+    return pollId;
+  }
 
   /**
    * Private helper method to generate the qrcodes for a poll option and store the qr files on
