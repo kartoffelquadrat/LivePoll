@@ -34,11 +34,22 @@ function modifyPackMetaDom(packMetaMap) {
  * Initiates call to backend to create REST endpoints for all polls associated to the given pack.
  */
 function instantiatePack(packId) {
-    alert("Instantiating pack: "+packId)
 
-    fetch('/menu/packs/'+packId, {method: "PUT"})
+    fetch('/menu/packs/' + packId, {method: "PUT"})
         .then(result => result.json())
-        .then(pollUrls => alert(pollUrls))
+        .then(pollUrls => {
+                    // TODO: store url list in local store.
+
+                    // construct poll URL for first ID in list and forward
+                    window.location.replace(pollIdToUrl(pollUrls[0]))
+        })
+}
+
+/**
+ * Converts a given poll Id string to the associated webpage URL.
+ */
+function pollIdToUrl(pollID) {
+    return "/polls/"+pollID
 }
 
 /**
@@ -62,7 +73,7 @@ function createPackCard(packFileName, packMeta) {
     // of pack
     div.setAttribute("class", "menu-option")
     div.innerHTML = `
-        <div onclick="instantiatePack(\``+packFileName+`\`)">
+        <div onclick="instantiatePack(\`` + packFileName + `\`)">
             <h2>${title}</h2>
             <br/>
             ${abstract}
