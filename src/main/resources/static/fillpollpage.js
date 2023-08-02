@@ -5,15 +5,25 @@ let backendDown = false
  * Registers a handler to go back to poll overview and a second one to reveal the poll counts.
  */
 function addKeyListeners() {
-
-    console.log(sessionStorage.getItem("pack-sequence"))
-    console.log(sessionStorage.getItem("pack-pointer"))
-
+    // Back to main menu
     document.addEventListener('keyup', (e) => {
-        if (e.code === "ArrowLeft") window.location.href = "/";
+        if (e.code === "ArrowUp") window.location.href = "/"
     });
+    // Reveal numbers
     document.addEventListener('keyup', (e) => {
-        if (e.code === "Space") revealNumbers();
+        if (e.code === "Space") revealNumbers()
+    });
+    // Next poll in pack series (if there is any, otherwise no action)
+    document.addEventListener('keyup', (e) => {
+        if (e.code === "ArrowRight") {
+            console.log("left")
+        }
+    });
+    // Previous poll in pack series (if there is any, otherwise no action)
+    document.addEventListener('keyup', (e) => {
+        if (e.code === "ArrowLeft") {
+            console.log("right")
+        }
     });
 }
 
