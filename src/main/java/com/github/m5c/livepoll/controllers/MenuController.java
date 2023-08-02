@@ -40,6 +40,7 @@ public class MenuController {
   public MenuController(@Autowired PackPersistence packPersistence,
                         @Autowired PollController pollController) {
     this.packPersistence = packPersistence;
+    this.pollController = pollController;
   }
 
   /**

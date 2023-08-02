@@ -53,7 +53,7 @@ h4 {
     display: inline-block;
     /*rounded corners*/
     border-radius: 2rem;
-    background: #aecef6;
+    background: #88abd2;
     margin: .1rem;
 
     /*space of content to rim*/
@@ -70,7 +70,7 @@ h4 {
 }
 
 .menu-option:hover {
-    background-color: #88abd2;
+    background-color: #aecef6;
     transform: scale(1.04);
     /*color: white;*/
 }

@@ -32,7 +32,7 @@
         </dependency>
 
 
-        <!--        QR encode support-->
+        <!-- QR encode support-->
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
@@ -40,7 +40,7 @@
         </dependency>
 
 
-        <!--        QR persistence support-->
+        <!-- QR persistence support-->
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>javase</artifactId>

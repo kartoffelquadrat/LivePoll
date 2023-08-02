@@ -52,13 +52,14 @@ public class PackPersistenceTest {
     String date = DateAndTopicIdGenerator.getFormattedDate();
     Pack loadedPack = packPersistence.loadPackFromDisk(date + "-sample-pack.json");
     System.out.println(loadedPack);
+    System.out.println("Persisted test file to: "+ sampleTestBaseDir);
 
     // Verify content of deserialized pack
     Assert.assertEquals(
         "Amount of questions in deserialized Pack does not match the one of original.", 2,
         loadedPack.getQuestions().size());
 
-    // Remove test pack to keep test directoy clean for subsequent test
+    // Remove test pack to keep test directory clean for subsequent test
     packPersistence.deletePack(testPackDiskLocation);
   }
 
