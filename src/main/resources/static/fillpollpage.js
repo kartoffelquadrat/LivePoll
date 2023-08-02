@@ -16,13 +16,14 @@ function addKeyListeners() {
     // Next poll in pack series (if there is any, otherwise no action)
     document.addEventListener('keyup', (e) => {
         if (e.code === "ArrowRight") {
-            console.log("left")
+            packForward()
         }
     });
     // Previous poll in pack series (if there is any, otherwise no action)
     document.addEventListener('keyup', (e) => {
         if (e.code === "ArrowLeft") {
             console.log("right")
+            packBackward()
         }
     });
 }
