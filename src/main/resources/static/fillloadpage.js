@@ -38,18 +38,9 @@ function instantiatePack(packId) {
     fetch('/menu/packs/' + packId, {method: "PUT"})
         .then(result => result.json())
         .then(pollUrls => {
-                    // TODO: store url list in local store.
-
-                    // construct poll URL for first ID in list and forward
-                    window.location.replace(pollIdToUrl(pollUrls[0]))
+            // store ids in local session store, instantiate index pointer, redirect to first poll.
+            initializePackSequence(pollUrls)
         })
-}
-
-/**
- * Converts a given poll Id string to the associated webpage URL.
- */
-function pollIdToUrl(pollID) {
-    return "/polls/"+pollID
 }
 
 /**

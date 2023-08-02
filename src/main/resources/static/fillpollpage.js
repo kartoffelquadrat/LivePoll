@@ -5,6 +5,10 @@ let backendDown = false
  * Registers a handler to go back to poll overview and a second one to reveal the poll counts.
  */
 function addKeyListeners() {
+
+    console.log(sessionStorage.getItem("pack-sequence"))
+    console.log(sessionStorage.getItem("pack-pointer"))
+
     document.addEventListener('keyup', (e) => {
         if (e.code === "ArrowLeft") window.location.href = "/";
     });
@@ -64,11 +68,6 @@ function updateOutcome() {
     let firstoption = document.getElementById("firstoptioncode").innerText;
     let maybeoption = document.getElementById("maybeoptioncode").innerText;
     let lastoption = document.getElementById("lastoptioncode").innerText;
-
-    console.log("pollid: " + pollid);
-    console.log("firstoption: " + firstoption);
-    console.log("maybeoption: " + maybeoption);
-    console.log("lastoption: " + lastoption);
 
     refreshVote(pollid, firstoption, "counter1");
     refreshVote(pollid, lastoption, "counter3");
