@@ -7,7 +7,18 @@
     <script th:src="@{../fillpollpage.js}" src="../static/fillpollpage.js"></script>
 </head>
 <body onload="removeNeutralOptionIfEmpty(), autoreload(), updateOutcome(), addKeyListeners()">
+
+<!-- Backend offline banner, by default hidden.-->
+<!--See: https://stackoverflow.com/a/1572762-->
+<div style="display: none" id="offline-banner" >
+    <div id="banner-content">
+    Poll update failed. Backend probably down.
+    </div>
+</div>
+
 <h1 th:text="${topic}"></h1>
+
+<!--This next one line seems to break IDE preveiw, unclear why-->
 <p style="display: none" id="pollid" th:text="${pollid}"></p>
 <h3 class="bottom-three"> Scan one of below QR-Codes to vote...</h3>
 

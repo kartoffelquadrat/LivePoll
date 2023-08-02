@@ -1,3 +1,6 @@
+// global variables, network status
+let backendDown = false
+
 /**
  * Registers a handler to go back to poll overview and a second one to reveal the poll counts.
  */
@@ -30,10 +33,14 @@ function removeNeutralOptionIfEmpty() {
 
 
 function autoreload() {
-    setTimeout(function () {
-        updateOutcome();
-        autoreload();
-    }, 1000);
+    if (backendDown) {
+        console.log("Backend is down, stopped checking for updates...")
+    } else {
+        setTimeout(function () {
+            updateOutcome();
+            autoreload();
+        }, 1000);
+    }
 }
 
 function revealNumbers() {
@@ -78,7 +85,13 @@ function updateOutcome() {
  */
 function refreshVote(pollid, option, targetelement) {
 
-    fetch('/polls/' + pollid + '/outcome/' + option).then(result => result.text()).then(text => {
-        if (text >= 0) document.getElementById(targetelement).textContent = text; else window.location.href = "/";
-    });
+    fetch('/polls/' + pollid + '/outcome/' + option)
+        .then(response => response.text())
+        .then(text => {
+            if (text >= 0) document.getElementById(targetelement).textContent = text; else window.location.href = "/"
+        })
+        .catch(error => {
+            backendDown = true
+            document.getElementById('offline-banner').style.display = null
+        })
 }
