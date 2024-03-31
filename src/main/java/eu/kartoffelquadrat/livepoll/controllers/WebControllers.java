@@ -3,6 +3,7 @@ package eu.kartoffelquadrat.livepoll.controllers;
 import eu.kartoffelquadrat.livepoll.Poll;
 import eu.kartoffelquadrat.livepoll.PollLauncher;
 import eu.kartoffelquadrat.livepoll.PollManager;
+import eu.kartoffelquadrat.livepoll.accesscontrol.SourceChecker;
 import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
 import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
 import java.io.FileInputStream;
@@ -42,7 +43,7 @@ public class WebControllers {
   @RequestMapping("/")
   public String forwardToLanding(HttpServletRequest request) {
 
-    if (!isCallFromLocalhost(request)) {
+    if (!SourceChecker.isCallFromLocalhostLanOrVpn(request)) {
       return "denied";
     } else {
       return "setup";
@@ -61,7 +62,7 @@ public class WebControllers {
   public String accessPoll(@PathVariable("pollid") String pollid, Model model,
                            HttpServletRequest request) {
 
-    if (!isCallFromLocalhost(request)) {
+    if (!SourceChecker.isCallFromLocalhostLanOrVpn(request)) {
       return "denied";
     } else {
       if (pollManager.isExistentPoll(pollid)) {
@@ -122,7 +123,7 @@ public class WebControllers {
       throws IOException {
 
     // dont accept calls from elsewhere
-    if (!isCallFromLocalhost(request)) {
+    if (!SourceChecker.isCallFromLocalhostLanOrVpn(request)) {
       return null;
     }
 
@@ -130,16 +131,5 @@ public class WebControllers {
     FileInputStream in = new FileInputStream(
         PollLauncher.pollTmpDir + '/' + pollid + "-" + option + ".png");
     return IOUtils.toByteArray(in);
-  }
-
-  /**
-   * Helper method to determine if a servlet connection was established from the same machine as the
-   * server is running on.
-   *
-   * @param request as the Http servlet request to examine.
-   * @return true if the request origin is localhost, false otherwise.
-   */
-  private boolean isCallFromLocalhost(HttpServletRequest request) {
-    return request.getRemoteAddr().equals("127.0.0.1");
   }
 }

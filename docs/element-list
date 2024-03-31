@@ -1,4 +1,5 @@
 eu.kartoffelquadrat.livepoll
+eu.kartoffelquadrat.livepoll.accesscontrol
 eu.kartoffelquadrat.livepoll.controllers
 eu.kartoffelquadrat.livepoll.pollutils
 eu.kartoffelquadrat.livepoll.qrgenerator

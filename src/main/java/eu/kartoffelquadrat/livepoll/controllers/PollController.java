@@ -4,6 +4,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import eu.kartoffelquadrat.livepoll.Poll;
 import eu.kartoffelquadrat.livepoll.PollManager;
+import eu.kartoffelquadrat.livepoll.accesscontrol.SourceChecker;
 import eu.kartoffelquadrat.livepoll.pollutils.AlphabetSanitizer;
 import eu.kartoffelquadrat.livepoll.pollutils.Hyphenizer;
 import eu.kartoffelquadrat.livepoll.qrgenerator.LocalIpResolver;
@@ -90,7 +91,7 @@ public class PollController {
                            @PathVariable("option") String option, HttpServletRequest request) {
 
     // only treat if request form local machine and poll id valid
-    if (request.getRemoteAddr().equals("127.0.0.1")) {
+    if (SourceChecker.isCallFromLocalhostLanOrVpn(request)) {
       if (pollManager.isExistentPoll(pollId)) {
         return pollManager.getPollByIdentifier(pollId).getVotes(option);
       }
@@ -118,7 +119,7 @@ public class PollController {
       throws IOException, WriterException {
 
     // reject if this request comes from a foreign machine.
-    if (!request.getRemoteAddr().equals("127.0.0.1")) {
+    if (!SourceChecker.isCallFromLocalhostLanOrVpn(request)) {
       return "Go away!";
     }
 
